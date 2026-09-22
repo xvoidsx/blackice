@@ -1,0 +1,351 @@
+/* blackice theme — nightshadeNeon reskin for uBlock Origin Lite
+ *
+ * Thin-diff discipline: this file is OURS. It loads after default.css and
+ * overrides only design tokens, so upstream changes to default.css flow
+ * through untouched. Never edit default.css for theming — add tokens here.
+ */
+
+:root {
+    /* nightshadeNeon typeface */
+    --font-family: "Noto Sans", "Inter", sans-serif;
+
+    /* Primary ramp re-hued from upstream blue (h255) to neon pink.
+     * --primary-50 is the brand anchor: #ff10f0.
+     * Tool: calibrated by eye against the waybar neon-cycle tokens. */
+    --primary-5:   40   3  34;
+    --primary-10:  59   5  50;
+    --primary-20:  98  10  82;
+    --primary-30: 138  15 115;
+    --primary-40: 178  20 148;
+    --primary-50: 255  16 240;  /* #ff10f0 — blackice pink */
+    --primary-60: 255  92 244;
+    --primary-70: 255 143 247;
+    --primary-80: 255 185 250;
+    --primary-90: 255 220 252;
+    --primary-95: 255 238 254;
+
+    /* Cyan secondary for accents that were violet/blue upstream */
+    --cyan-40: 0 180 180;
+    --cyan-60: 0 255 255;       /* #00ffff */
+
+    /* Green stays neon: #39ff14 */
+    --neon-green-60: 57 255 20;
+}
+
+/* Dark surfaces pushed a touch deeper toward black, faint violet undertone */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --surface-0-rgb: 5 5 10;
+        --surface-1: rgb(18 18 28);
+        --surface-2: rgb(28 28 42);
+        --surface-3: rgb(40 40 58);
+    }
+}
+:root.dark {
+    --surface-0-rgb: 5 5 10;
+    --surface-1: rgb(18 18 28);
+    --surface-2: rgb(28 28 42);
+    --surface-3: rgb(40 40 58);
+}
+
+:root {
+    /* Links and interactive accents follow the pink ramp */
+    --link-ink: rgb(var(--primary-50));
+    --link-hover-ink: rgb(var(--primary-60));
+
+    /* Popup: the big power button glows blackice pink */
+    --popup-power-ink-rgb: var(--primary-50);
+    --popup-cell-cname-ink: rgb(var(--primary-60));
+
+    /* Dashboard tabs */
+    --dashboard-tab-active-ink-rgb: var(--primary-50);
+    --dashboard-tab-focus-surface-rgb: var(--primary-20);
+    --dashboard-highlight-surface-rgb: var(--primary-20);
+
+    /* Codemirror selection follows the brand */
+    --cm-selection-focused-surface: rgb(var(--primary-80));
+
+    /* Happy green goes neon */
+    --dashboard-happy-green: rgb(var(--neon-green-60));
+}
+
+:root.dark {
+    --link-ink: rgb(var(--primary-60));
+    --link-hover-ink: rgb(var(--primary-70));
+    --accent-surface-1: rgb(var(--primary-60));
+}
+
+/* ============ blackice v2: nightshadeNeon motion + new surfaces ============ */
+/* Restrained by design: glow on hover/focus, smooth transitions, one slow
+ * ambient pulse. Everything here degrades to a static theme when the user
+ * prefers reduced motion. */
+
+/* ---- global: everything interactive eases ---- */
+:root {
+    --bi-ease: 0.22s ease;
+}
+body button,
+body input,
+body select,
+body a,
+body .tabButton {
+    transition: color var(--bi-ease), background-color var(--bi-ease),
+        border-color var(--bi-ease), box-shadow var(--bi-ease),
+        text-shadow var(--bi-ease), transform var(--bi-ease);
+}
+
+/* ---- dashboard nav: neon glow on hover/focus ---- */
+body #dashboard-nav > .tabButton:hover,
+body #dashboard-nav > .tabButton:focus-visible {
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 12px rgb(var(--primary-50) / 0.8);
+}
+body #dashboard-nav .logo img {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 0 6px rgb(var(--primary-50) / 0.55));
+}
+
+/* ---- dashboard header: slow ambient gradient pulse ---- */
+body > header {
+    position: relative;
+}
+body > header::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(60% 120% at 8% 50%, rgb(var(--primary-50) / 0.10), transparent 70%),
+        radial-gradient(60% 120% at 92% 50%, rgb(var(--cyan-60) / 0.08), transparent 70%);
+    animation: bi-header-breathe 12s ease-in-out infinite;
+}
+@keyframes bi-header-breathe {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+}
+
+/* ---- command deck ---- */
+#commandDeck {
+    margin-bottom: 1.5em;
+}
+#commandDeck h3 {
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 10px rgb(var(--primary-50) / 0.45);
+}
+.deckCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75em;
+}
+.deckCard {
+    border: 1px solid rgb(var(--primary-50) / 0.35);
+    border-radius: 10px;
+    padding: 0.8em 1em;
+    background: linear-gradient(160deg, rgb(var(--primary-20) / 0.25), transparent 60%);
+    box-shadow: 0 0 0 rgb(var(--primary-50) / 0);
+}
+.deckCard:hover {
+    border-color: rgb(var(--primary-50) / 0.8);
+    box-shadow: 0 0 14px rgb(var(--primary-50) / 0.35);
+}
+.deckValue {
+    font-size: 1.7em;
+    font-weight: 700;
+    color: rgb(var(--cyan-60));
+    text-shadow: 0 0 12px rgb(var(--cyan-60) / 0.5);
+    font-variant-numeric: tabular-nums;
+    text-transform: capitalize;
+}
+.deckLabel {
+    margin-top: 0.2em;
+    font-size: 0.85em;
+    opacity: 0.85;
+}
+.deckSub {
+    margin-top: 0.35em;
+    font-size: 0.78em;
+    font-style: italic;
+    color: rgb(var(--primary-70));
+}
+
+/* ---- "From xvoidsx" curated-lists section ---- */
+#xvoidsxLists {
+    margin: 1.5em 0;
+    border: 1px dashed rgb(var(--primary-50) / 0.5);
+    border-radius: 10px;
+    padding: 1em 1.2em;
+    background: rgb(var(--primary-20) / 0.18);
+}
+#xvoidsxLists h3 {
+    margin-top: 0;
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 10px rgb(var(--primary-50) / 0.45);
+}
+#xvoidsxLists p {
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* ---- popup: quick profiles ---- */
+#uBO-popup-panel #quickProfiles {
+    margin-top: 0;
+}
+#uBO-popup-panel #quickProfiles > label {
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+#uBO-popup-panel .profileButtons {
+    display: flex;
+    gap: 0.4em;
+    margin-top: 0.3em;
+}
+#uBO-popup-panel .profileButtons button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em 0.35em;
+    border: 1px solid rgb(var(--primary-50) / 0.35);
+    border-radius: 8px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+#uBO-popup-panel .profileButtons button b {
+    color: rgb(var(--primary-60));
+    font-size: 0.95em;
+}
+#uBO-popup-panel .profileButtons button span {
+    font-size: 0.72em;
+    opacity: 0.75;
+    line-height: 1.25;
+}
+#uBO-popup-panel .profileButtons button:hover {
+    border-color: rgb(var(--primary-50) / 0.9);
+    box-shadow: 0 0 12px rgb(var(--primary-50) / 0.4);
+}
+#uBO-popup-panel .profileButtons button.active {
+    border-color: rgb(var(--primary-50));
+    background: rgb(var(--primary-20) / 0.45);
+    box-shadow: 0 0 14px rgb(var(--primary-50) / 0.55),
+        inset 0 0 8px rgb(var(--primary-50) / 0.2);
+}
+#uBO-popup-panel .profileButtons button.active b {
+    text-shadow: 0 0 10px rgb(var(--primary-50) / 0.8);
+}
+
+/* ---- popup: command card header ---- */
+#uBO-popup-panel #biPopupBrand {
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 12px rgb(var(--primary-50) / 0.55);
+}
+#uBO-popup-panel #biPopupShard {
+    filter: drop-shadow(0 0 8px rgb(var(--primary-50) / 0.5));
+}
+#uBO-popup-panel #biPopupHeader {
+    border-bottom: 1px solid rgb(var(--primary-50) / 0.25);
+}
+
+/* ---- popup: hero blocked count ---- */
+#uBO-popup-panel #blockedHero {
+    transition: background-color var(--bi-ease);
+}
+#uBO-popup-panel #blockedHero.enabled:hover {
+    background: rgb(var(--primary-20) / 0.25);
+}
+#uBO-popup-panel #blockedCount {
+    color: rgb(var(--cyan-60));
+    text-shadow: 0 0 14px rgb(var(--cyan-60) / 0.6);
+    font-variant-numeric: tabular-nums;
+}
+#uBO-popup-panel #blockedHero.enabled:hover #blockedCount {
+    text-shadow: 0 0 20px rgb(var(--cyan-60) / 0.9);
+}
+#uBO-popup-panel #blockedEmpty {
+    color: rgb(var(--neon-green-60));
+    text-shadow: 0 0 10px rgb(var(--neon-green-60) / 0.35);
+}
+
+/* ---- popup: power/mode control glow ---- */
+#uBO-popup-panel .filteringModeSlider {
+    transition: filter var(--bi-ease);
+}
+#uBO-popup-panel .filteringModeSlider.bi-pulse {
+    animation: bi-mode-pulse 0.45s ease-out;
+}
+@keyframes bi-mode-pulse {
+    0% { filter: drop-shadow(0 0 14px rgb(var(--primary-50) / 0.9)); }
+    100% { filter: drop-shadow(0 0 0 rgb(var(--primary-50) / 0)); }
+}
+#uBO-popup-panel .filteringModeButton > div {
+    transition: box-shadow var(--bi-ease), background-color var(--bi-ease);
+}
+#uBO-popup-panel .filteringModeSlider:hover .filteringModeButton > div {
+    box-shadow: 0 0 10px rgb(var(--primary-50) / 0.7);
+}
+
+/* ---- strictblock: quip + warning glow ---- */
+#blackiceQuip {
+    margin: 1em 0 0;
+    text-align: center;
+    font-style: italic;
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 12px rgb(var(--primary-50) / 0.5);
+}
+#warningSign {
+    animation: bi-warning-glow 3.2s ease-in-out infinite;
+}
+@keyframes bi-warning-glow {
+    0%, 100% { filter: drop-shadow(0 0 4px rgb(var(--primary-50) / 0.35)); }
+    50% { filter: drop-shadow(0 0 16px rgb(var(--primary-50) / 0.8)); }
+}
+
+/* ---- matched rules: plain-language summary ---- */
+#matchedSummary {
+    margin: 1em;
+    padding: 0.7em 1em;
+    border: 1px solid rgb(var(--neon-green-60) / 0.4);
+    border-radius: 8px;
+    background: rgb(var(--neon-green-60) / 0.06);
+    color: rgb(var(--neon-green-60));
+}
+
+/* ---- about page: blackice touches ---- */
+#aboutNameVer {
+    color: rgb(var(--primary-60));
+    text-shadow: 0 0 10px rgb(var(--primary-50) / 0.4);
+    font-weight: 700;
+}
+
+/* ---- katakana rain backdrop (dashboard, welcome) ----
+   Negative z-index paints above the body's own background but below
+   all page content, so text stays readable. */
+#biRain {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ---- reduced motion: all flair goes static ---- */
+@media (prefers-reduced-motion: reduce) {
+    body > header::after,
+    #warningSign,
+    #uBO-popup-panel .filteringModeSlider.bi-pulse {
+        animation: none;
+    }
+    body button,
+    body input,
+    body select,
+    body a,
+    body .tabButton,
+    #uBO-popup-panel .filteringModeSlider,
+    #uBO-popup-panel .filteringModeButton > div {
+        transition: none;
+    }
+}

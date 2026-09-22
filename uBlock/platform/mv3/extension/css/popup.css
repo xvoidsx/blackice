@@ -1,0 +1,355 @@
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
+@keyframes busy {
+    to { opacity: 90%; }
+}
+
+/* External CSS values override */
+.fa-icon.fa-icon-badged > .fa-icon-badge {
+    bottom: auto;
+    top: -20%;
+}
+
+:root {
+    --popup-min-width: 360px;
+}
+
+:root body,
+:root.mobile body {
+    --popup-gap: var(--font-size);
+    --popup-gap-thin: calc(0.5 * var(--popup-gap));
+    --popup-gap-extra-thin: calc(0.25 * var(--popup-gap));
+    min-width: var(--popup-min-width);
+}
+:root body.loading {
+    visibility: hidden;
+}
+a {
+    color: var(--ink-1);
+        fill: var(--ink-1);
+    text-decoration: none;
+}
+:focus {
+    outline: 0;
+}
+
+main {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+body.busy main {
+    pointer-events: none;
+}
+:root.portrait main {
+    align-self: inherit;
+}
+aside {
+    background-color: var(--surface-1);
+    bottom: 0;
+    display: none;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+aside .fa-icon {
+    animation: spin 1s steps(8) infinite;
+    fill: var(--surface-3);
+    font-size: 4em;
+    margin: 2em;
+}
+body.busy aside {
+    animation: busy 0s step-start 1s;
+    animation-fill-mode: forwards;
+    display: block;
+}
+
+body.nodata .needData {
+    visibility: hidden;
+}
+
+#hostname {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    min-height: calc(var(--font-size) * 2);
+    text-align: left;
+    word-break: break-all;
+}
+#hostname > span {
+    word-break: break-all;
+}
+#hostname > span + span {
+    font-weight: 600;
+}
+
+/* blackice command card header */
+#biPopupHeader {
+    align-items: center;
+    background-color: var(--popup-toolbar-surface);
+    display: flex;
+    gap: 0.7em;
+    padding: 0.7em 0.9em;
+}
+#biPopupShard {
+    flex-shrink: 0;
+    height: 40px;
+    width: 40px;
+}
+#biPopupTitles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    min-width: 0;
+}
+#biPopupBrand {
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+}
+
+/* blackice status line: mostly quiet tagline, brief RGB-split glitch */
+#biStatusLine {
+    color: var(--ink-3);
+    font-size: 0.7em;
+    letter-spacing: 0.4em;
+    opacity: 0.65;
+    padding: 0.45em 0 0.1em;
+    text-align: center;
+    text-indent: 0.4em;
+    text-transform: uppercase;
+}
+#biStatusLine > span {
+    display: inline-block;
+    animation: biGlitch 6s linear infinite;
+}
+@keyframes biGlitch {
+    /* glitch burst lands at the start of the cycle so a re-kicked
+       animation makes the incoming line glitch in */
+    0% {
+        opacity: 1;
+        text-shadow: -2px 0 #ff10f0, 2px 0 #00ffff;
+        transform: translateX(-1px) skewX(-4deg);
+    }
+    3% {
+        opacity: 1;
+        text-shadow: 2px 0 #ff10f0, -2px 0 #00ffff;
+        transform: translateX(1px);
+    }
+    6% {
+        opacity: 0.7;
+        text-shadow: -1px 0 #39ff14, 1px 0 #ff10f0;
+        transform: none;
+    }
+    9%, 100% {
+        opacity: 1;
+        text-shadow: none;
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #biStatusLine > span {
+        animation: none;
+    }
+}
+
+/* blackice hero blocked count */
+#blockedHero {
+    align-items: baseline;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--surface-2);
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    gap: 0.6em;
+    justify-content: center;
+    padding: 0.9em 0.5em 0.7em;
+    width: 100%;
+}
+#blockedHero:not(.enabled) {
+    cursor: default;
+}
+#blockedCount {
+    font-size: 2.6em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+#blockedHeroLabel {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+#blockedEmpty {
+    border-bottom: 1px solid var(--surface-2);
+    font-style: italic;
+    opacity: 0.75;
+    padding: 0.9em 0.5em;
+    text-align: center;
+}
+
+/* blackice quick profiles keep their buttons, roomier card */
+#quickProfiles {
+    padding: 0.6em 0.9em 0;
+}
+
+/* tool buttons as a grid instead of a vertical list */
+.toolMenu {
+    border-top: 1px solid var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0;
+    padding: 0.5em 0.9em 0;
+}
+.toolGrid {
+    display: grid;
+    gap: 0.3em;
+    grid-template-columns: 1fr 1fr;
+}
+
+body[data-forbid~="filteringMode"] .filteringModeSlider {
+    pointer-events: none;
+}
+body[data-forbid~="zapper"] #gotoZapper,
+body[data-forbid~="picker"] #gotoPicker,
+body[data-forbid~="picker"] #gotoUnpicker,
+body[data-forbid~="report"] #gotoReport,
+body[data-forbid~="zapper"][data-forbid~="picker"][data-forbid~="report"] .localTools {
+    display: none;
+}
+body[data-forbid~="dashboard"] .globalTools {
+    display: none;
+}
+
+#filteringModeText {
+    color: var(--ink-3);
+    margin-bottom: var(--popup-gap-thin);
+    text-align: center;
+    text-transform: lowercase;
+}
+#filteringModeText > span {
+    color: var(--accent-surface-1);
+}
+#filteringModeText > span:nth-of-type(2) {
+    display: none;
+}
+#filteringModeText > span:nth-of-type(2):not(:empty) {
+    display: inline;
+}
+#filteringModeText > span:nth-of-type(2):not(:empty)::before {
+    content: '\2002\2192\2002';
+}
+[dir="rtl"] #filteringModeText > span:nth-of-type(2):not(:empty)::before {
+    content: '\2002\2190\2002';
+}
+
+.filteringModeSlider {
+    align-self: center;
+    margin: var(--popup-gap) 0;
+}
+
+body.needReload #refresh {
+    visibility: visible;
+}
+
+.toolMenu {
+    border-top: 1px solid var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0;
+    padding-top: 0.5em;
+}
+:root:not(.isHTTP) .needHTTP {
+    display: none;
+}
+.toolMenu > label {
+    font-size: 90%;
+    color: var(--ink-2);
+    line-height: calc(var(--font-size) * 1.8);
+    margin-inline-start: 0.5em;
+}
+.toolGrid > .tool {
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5em;
+    padding: 0.55em 0.6em;
+    unicode-bidi: embed;
+}
+.toolGrid > .tool:hover {
+    color: var(--ink-1);
+      fill: var(--ink-1);
+}
+.toolGrid > .tool:not(.enabled) {
+    display: none;
+}
+.toolGrid > .tool .fa-icon {
+    font-size: 1.4em;
+    min-width: 1.4em;
+}
+.toolGrid > .tool [data-i18n] {
+    flex-grow: 1;
+}
+
+.toolRibbon {
+    background-color: var(--popup-toolbar-surface);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 0;
+    white-space: normal;
+}
+.toolRibbon .tool {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-width: 32px;
+    padding: var(--default-gap-small);
+    unicode-bidi: embed;
+    visibility: hidden;
+}
+.toolRibbon .tool:hover {
+    color: var(--ink-1);
+        fill: var(--ink-1);
+}
+.toolRibbon .tool.enabled {
+    visibility: visible;
+}
+.toolRibbon .tool.fa-icon {
+    font-size: 1.4em;
+}
+:root.mobile .toolRibbon .tool.fa-icon {
+    font-size: 1.6em;
+}
+.toolRibbon .tool .caption {
+    font: 10px/12px sans-serif;
+    margin-top: 6px;
+    text-align: center;
+}
+:root:not(.mobile) .toolRibbon .caption {
+    display: none;
+}
+
+/* horizontally-constrained viewport */
+:root.portrait body {
+    overflow-y: auto;
+    width: 100%;
+}
+:root.portrait main {
+    max-width: unset;
+}
+/* mouse-driven devices */
+:root.desktop {
+    display: flex;
+}
+:root.desktop .tool:hover {
+    background-color: var(--popup-toolbar-surface-hover);
+}
