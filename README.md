@@ -9,7 +9,23 @@ A Manifest V3 ad and tracker blocker with a nightshadeNeon soul. Forged on top o
 
 <img width="360" height="578" alt="2026-09-22T07:47:09,607575348-05:00" src="https://github.com/user-attachments/assets/e0a98c20-ea0d-419a-9569-5e350339a698" />
 
-**blackice** makes blocking ads and trackers easy, with a beautiful [nightshadeNeon](https://rav3ndust.xyz/wiki/nightshadeNeon.html)-drenched UI. Four profiles — Off, Permissive, Standard, Ghost — live per-tab block counts, a matched-rules view, and glitch-status lines, all in a 360px command card.
+###### blackice popover interface
+
+**blackice** makes blocking ads and trackers easy, with a beautiful [nightshadeNeon](https://rav3ndust.xyz/wiki/nightshadeNeon.html)-drenched UI. 
+
+Four profiles — *Off*, *Permissive*, *Standard*, *Ghost* — live per-tab block counts, a matched-rules view, and glitch-status lines, all in a 360px command card.
+
+<img width="642" height="607" alt="2026-09-22T07:56:25,205410137-05:00" src="https://github.com/user-attachments/assets/8d53fad4-6381-4645-9f20-c5a8ba3af027" />
+
+###### blackice settings screen
+
+**blackice** also has an easy-to-understand Settings page, with a **Command Deck** showing some of your privacy stats: 
+
+- The number of ads, trackers, and other nuisances blocked so far
+- The number of active filtering rules
+- The number of filter lists that are turned on
+- The **protection mode** that is currently being used
+
 
 
 ## Attribution
