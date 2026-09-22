@@ -26,6 +26,8 @@ Four profiles — *Off*, *Permissive*, *Standard*, *Ghost* — live per-tab bloc
 - The number of filter lists that are turned on
 - The **protection mode** that is currently being used
 
+Past the Command Deck, the dashboard carries the full uBlock Origin Lite toolkit in Blackice dress: a **Filter Lists** page for choosing which curated lists stand guard, **Custom Filters** for writing your own rules, and the settings themselves — all under the katakana rain.
+
 
 
 ## Attribution
