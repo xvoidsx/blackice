@@ -1111,8 +1111,8 @@
   "tags": "malware polish polski",
   "homeURL": "https://cert.pl/lista-ostrzezen/",
   "filters": {
-   "total": 17898,
-   "accepted": 17898,
+   "total": 17899,
+   "accepted": 17899,
    "rejected": 0
   },
   "rules": {

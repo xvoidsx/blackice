@@ -1,5 +1,5 @@
-Secret: e222abbabb26a73b
-Version: 2026.1014.619
+Secret: 009dfde304632cd3
+Version: 2026.1014.625
 ============================
 Listset for 'ublock-filters':
 Input filter count: 10660
@@ -840,11 +840,11 @@ make-scriptlets.js / compile(): Can't find ac.js scriptlet
 make-scriptlets.js / compile(): Can't find ac.js scriptlet
 ============================
 Listset for 'pol-3':
-Input filter count: 17898
-	Accepted filter count: 17898
+Input filter count: 17899
+	Accepted filter count: 17899
 	Rejected filter count: 0
 Output rule count: 1
-	Pruning requestDomains: from 17898 to 13869
+	Pruning requestDomains: from 17899 to 13870
 
 	Maybe good regexes (raw/minimized): 0/0
 	Static rules (raw/minimized): 1/1
