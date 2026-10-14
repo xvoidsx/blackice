@@ -1,18 +1,16 @@
-**uBO Lite** (uBOL), an [MV3 API-based](https://developer.chrome.com/docs/extensions/mv3/intro/) content blocker.
+**blackice**, an [MV3 API-based](https://developer.chrome.com/docs/extensions/mv3/intro/) ad and tracker blocker — a fork of [uBlock Origin Lite](https://github.com/uBlockOrigin/uBOL-home) with a nightshadeNeon interface.
 
-- [Synopsis](https://github.com/uBlockOrigin/uBOL-issues#readme)
-- [Documentation](https://github.com/uBlockOrigin/uBOL-home/wiki)
+- [Repository](https://github.com/xvoidsx/blackice#readme)
+- [Documentation](https://github.com/xvoidsx/blackice/wiki)
 
 ## Release notes
 
 %changelog%
-- [Commit history](https://github.com/uBlockOrigin/uBOL-home/commits/%tag%)
+- [Commit history](https://github.com/xvoidsx/blackice/commits/%tag%)
 
 ## Installation
 
-When a new release is created, there is a delay before it becomes available in the various platform stores due to their respective review process. This is normal, please do not open issues about these delays.
+When a new release is created, there is a delay before it becomes available in the Chrome Web Store due to their review process. This is normal.
 
-- Chromium-based browsers: Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/ddkjiahejlhfcafbddmgiahcphecmpfh)
-- Firefox: Click [uBOLite_%tag%.firefox.signed.xpi](https://github.com/uBlockOrigin/uBOL-home/releases/download/%tag%/uBOLite_%tag%.firefox.signed.xpi)
-- Microsoft Edge: Install from [Edge Add-ons store](https://microsoftedge.microsoft.com/addons/detail/ublock-origin-lite/cimighlppcgcoapaliogpjjdehbnofhn)
-- Safari: Install from [App Store](https://apps.apple.com/us/app/ublock-origin-lite/id6745342698)
+- Chromium-based browsers: download the `blackice_%tag%.chromium.zip` below, unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
+- Microsoft Edge: same zip works — load unpacked via `edge://extensions` → Developer mode.
