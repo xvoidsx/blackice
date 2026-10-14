@@ -1,5 +1,5 @@
 # blackice
-<img width="1328" height="670" alt="image" src="https://github.com/user-attachments/assets/27fec579-be9c-46c3-a401-7914c975b4f" />
+<img width="1328" height="670" alt="image" src="https://github.com/user-attachments/assets/27fec579-be9c-46c3-a401-7914c975b4f7" />
 
 ###### the Blackice welcome page, greeting you and inviting you to open the dashboard
 
@@ -11,6 +11,10 @@ A Manifest V3 ad and tracker blocker with a nightshadeNeon soul. Forged on top o
 - **Edge Add-ons:** pending — in review
 - **Firefox:** coming soon
 - **Manual install / sideload:** grab the zip for your browser from [GitHub Releases](https://github.com/xvoidsx/blackice/releases), unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
+
+## The xvoidsx extension store — coming soon
+
+We're building our own extension store: an xvoidsx-run update pipeline for blackice and future xvoidsx extensions. Our own updates, our own review process (instant), our own rules. The Chrome, Edge, and Mozilla stores stay for discovery — but we own the pipeline.
 
 ## prettier privacy
 
