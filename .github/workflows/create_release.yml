@@ -45,7 +45,7 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh chromium ${{ env.TAGNAME }} before=$UBOL_REPO_DIR
-          echo "CHROMIUM_PACKAGE=blackice_${{ env.TAGNAME }}.chromium.zip" >> $GITHUB_ENV
+          echo "CHROMIUM_PACKAGE=blackice-chromium-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
           rm -rf chromium
           mv "$UBLOCK_REPO_DIR/dist/build/blackice.chromium" chromium
@@ -57,7 +57,7 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh edge ${{ env.TAGNAME }}
-          echo "EDGE_PACKAGE=blackice_${{ env.TAGNAME }}.edge.zip" >> $GITHUB_ENV
+          echo "EDGE_PACKAGE=blackice-edge-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
       # Firefox
       - name: Build Firefox blackice
@@ -67,7 +67,7 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh firefox ${{ env.TAGNAME }}
-          echo "FIREFOX_PACKAGE=blackice_${{ env.TAGNAME }}.firefox.xpi" >> $GITHUB_ENV
+          echo "FIREFOX_PACKAGE=blackice-firefox-${{ env.TAGNAME }}.xpi" >> $GITHUB_ENV
           cd - > /dev/null
       # Safari
       - name: Build Safari blackice
@@ -77,7 +77,7 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh safari ${{ env.TAGNAME }}
-          echo "SAFARI_PACKAGE=blackice_${{ env.TAGNAME }}.safari.zip" >> $GITHUB_ENV
+          echo "SAFARI_PACKAGE=blackice-safari-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
       - name: Commit blackice MV3 package files
         # https://github.com/marketplace/actions/github-action-for-committing-changes-to-a-repository
