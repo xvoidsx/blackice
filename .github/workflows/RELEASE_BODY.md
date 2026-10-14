@@ -6,6 +6,7 @@
 ## Release notes
 
 %changelog%
+- Brave's filter lists (`brave-unbreak`) included alongside uBO's
 - [Commit history](https://github.com/xvoidsx/blackice/commits/%tag%)
 
 ## Installation
