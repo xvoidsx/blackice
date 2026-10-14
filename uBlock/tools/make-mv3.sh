@@ -203,7 +203,7 @@ if [ "$FULL" = "yes" ]; then
         EXTENSION="xpi"
     fi
     echo "*** blackice.mv3: Creating publishable package..."
-    UBOL_PACKAGE_NAME="blackice_$TAGNAME.$PLATFORM.$EXTENSION"
+    UBOL_PACKAGE_NAME="blackice-$PLATFORM-$TAGNAME.$EXTENSION"
     UBOL_PACKAGE_DIR=$(mktemp -d)
     mkdir -p "$UBOL_PACKAGE_DIR"
     cp -R "$UBOL_DIR"/* "$UBOL_PACKAGE_DIR"/
