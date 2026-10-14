@@ -42,7 +42,7 @@ jobs:
           echo "CHROMIUM_PACKAGE=blackice-chromium-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
           rm -rf chromium
-          mv "$UBLOCK_REPO_DIR/dist/build/uBOLite.chromium" chromium
+          mv "$UBLOCK_REPO_DIR/dist/build/blackice.chromium" chromium
       # Edge
       - name: Build Edge uBOLite
         env:
