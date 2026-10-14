@@ -25,6 +25,12 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           UBLOCK_REPO_DIR="$UBOL_REPO_DIR/uBlock"
           echo "UBLOCK_REPO_DIR=$UBLOCK_REPO_DIR" >> $GITHUB_ENV
+      # Build CodeMirror bundle (required by make-mv3.sh)
+      - name: Build CodeMirror bundle
+        run: |
+          cd "${{ env.UBLOCK_REPO_DIR }}/platform/mv3/extension/lib/codemirror/codemirror-ubol"
+          npm ci
+          npm run build
       # Version, time-based
       - name: Create unique time-based version
         run: |
