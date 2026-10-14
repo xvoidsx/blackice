@@ -185,7 +185,7 @@
   },
   "css": {
    "generic": 71,
-   "specific": 4636
+   "specific": 4637
   },
   "popups": 1
  },
@@ -523,13 +523,13 @@
   "tags": "ads chinese 中文",
   "homeURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters",
   "filters": {
-   "total": 14463,
-   "accepted": 14454,
+   "total": 14464,
+   "accepted": 14455,
    "rejected": 3
   },
   "rules": {
-   "total": 6289,
-   "plain": 6264,
+   "total": 6288,
+   "plain": 6263,
    "regex": 25,
    "strictblock": 5,
    "rejected": 0
@@ -942,7 +942,7 @@
   },
   "css": {
    "generic": 125,
-   "specific": 1055
+   "specific": 1056
   }
  },
  {
@@ -1111,8 +1111,8 @@
   "tags": "malware polish polski",
   "homeURL": "https://cert.pl/lista-ostrzezen/",
   "filters": {
-   "total": 17899,
-   "accepted": 17899,
+   "total": 17900,
+   "accepted": 17900,
    "rejected": 0
   },
   "rules": {
@@ -1163,20 +1163,20 @@
   "tags": "ads belarusian беларуская kazakh tatar russian русский ukrainian українська uzbek uk",
   "homeURL": "https://forums.lanik.us/viewforum.php?f=102",
   "filters": {
-   "total": 19846,
-   "accepted": 19839,
+   "total": 19847,
+   "accepted": 19840,
    "rejected": 7
   },
   "rules": {
-   "total": 6014,
-   "plain": 5998,
+   "total": 6015,
+   "plain": 5999,
    "regex": 16,
    "strictblock": 8,
    "rejected": 0
   },
   "css": {
    "generic": 1270,
-   "specific": 7720
+   "specific": 7721
   },
   "popups": 772
  },
@@ -1370,13 +1370,13 @@
   "tags": "ads ukraine україна",
   "homeURL": "https://github.com/AdguardTeam/AdguardFilters#adguard-filters",
   "filters": {
-   "total": 3568,
-   "accepted": 3566,
+   "total": 3569,
+   "accepted": 3567,
    "rejected": 1
   },
   "rules": {
-   "total": 1485,
-   "plain": 1460,
+   "total": 1486,
+   "plain": 1461,
    "regex": 25,
    "strictblock": 7,
    "rejected": 0
@@ -1396,20 +1396,20 @@
   "tags": "ads vietnamese việt",
   "homeURL": "https://abpvn.com/",
   "filters": {
-   "total": 427,
-   "accepted": 427,
+   "total": 426,
+   "accepted": 426,
    "rejected": 0
   },
   "rules": {
-   "total": 306,
-   "plain": 304,
+   "total": 305,
+   "plain": 303,
    "regex": 2,
    "strictblock": 1,
    "rejected": 0
   },
   "css": {
    "generic": 45,
-   "specific": 351
+   "specific": 352
   },
   "popups": 2
  }

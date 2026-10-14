@@ -5996,5 +5996,6 @@
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["autoplay"]}}},"type":"redirect"},"condition":{"domainType":"thirdParty","resourceTypes":["sub_frame"],"urlFilter":"||vk.ru/clip_ext.php?*^autoplay="},"id":5995},
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["autoplay"]}}},"type":"redirect"},"condition":{"domainType":"thirdParty","resourceTypes":["sub_frame"],"urlFilter":"||vk.ru/video_ext.php?*^autoplay="},"id":5996},
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["autoplay"]}}},"type":"redirect"},"condition":{"domainType":"thirdParty","resourceTypes":["sub_frame"],"urlFilter":"||vkvideo.ru/video_ext.php?*^autoplay="},"id":5997},
-{"action":{"type":"block"},"condition":{"resourceTypes":["xmlhttprequest"],"responseHeaders":[{"header":"llasalbbubrrl"}],"urlFilter":"||pikabu.ru/ajax/"},"id":5998,"priority":10}
+{"action":{"type":"block"},"condition":{"resourceTypes":["xmlhttprequest"],"responseHeaders":[{"header":"llasalbbubrrl"}],"urlFilter":"||pikabu.ru/ajax/"},"id":5998,"priority":10},
+{"action":{"type":"block"},"condition":{"urlFilter":"||vzsar.ru/ads_p.php?bid="},"id":5999,"priority":10}
 ]
