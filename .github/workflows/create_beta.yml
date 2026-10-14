@@ -1,4 +1,4 @@
-name: uBO Lite beta
+name: blackice beta
 
 on: workflow_dispatch
 
@@ -29,7 +29,7 @@ jobs:
           echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
           echo "Version: $TAGNAME"
       # Chromium
-      - name: Build Chromium uBOLite beta
+      - name: Build Chromium blackice beta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -37,10 +37,10 @@ jobs:
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh chromium ${{ env.TAGNAME }}
           cd - > /dev/null
-          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite_${{ env.TAGNAME }}.chromium.zip \
-             ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.chromium.zip
+          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice_${{ env.TAGNAME }}.chromium.zip \
+             ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.chromium.zip
       # Edge
-      - name: Build Edge uBOLite beta
+      - name: Build Edge blackice beta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -48,10 +48,10 @@ jobs:
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh edge ${{ env.TAGNAME }}
           cd - > /dev/null
-          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite_${{ env.TAGNAME }}.edge.zip \
-             ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.edge.zip
+          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice_${{ env.TAGNAME }}.edge.zip \
+             ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.edge.zip
       # Firefox
-      - name: Build Firefox uBOLite beta
+      - name: Build Firefox blackice beta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -59,10 +59,10 @@ jobs:
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh firefox ${{ env.TAGNAME }}
           cd - > /dev/null
-          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite_${{ env.TAGNAME }}.firefox.xpi \
-             ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.firefox.xpi
+          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice_${{ env.TAGNAME }}.firefox.xpi \
+             ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.firefox.xpi
       # Safari
-      - name: Build Safari uBOLite beta
+      - name: Build Safari blackice beta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -70,8 +70,8 @@ jobs:
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh safari ${{ env.TAGNAME }}
           cd - > /dev/null
-          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite_${{ env.TAGNAME }}.safari.zip \
-             ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.safari.zip
+          mv ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice_${{ env.TAGNAME }}.safari.zip \
+             ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.safari.zip
       - name: Create GitHub beta release
         id: create_beta_release
         env:
@@ -83,7 +83,7 @@ jobs:
             --prerelease \
             --notes-file beta_body.txt
           gh release upload ${{ env.TAGNAME }}-beta \
-            ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.chromium.zip \
-            ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.edge.zip \
-            ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.firefox.xpi \
-            ${{ env.UBLOCK_REPO_DIR }}/dist/build/uBOLite.beta.safari.zip
+            ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.chromium.zip \
+            ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.edge.zip \
+            ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.firefox.xpi \
+            ${{ env.UBLOCK_REPO_DIR }}/dist/build/blackice.beta.safari.zip
