@@ -1,0 +1,206 @@
+[
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "initiatorDomains": [
+   "anime4i.vip",
+   "anroll.net",
+   "antenasport.top",
+   "casthill.net",
+   "daddyhd.com",
+   "embedsports.top",
+   "evfancy.link",
+   "eztvx.to",
+   "fbstreams.co",
+   "filecrypt.cc",
+   "foxtrend.net",
+   "gopst.link",
+   "insidesport.info",
+   "istreameast.is",
+   "nextgencloudtools.com",
+   "ntvstream.cx",
+   "piratecat.online",
+   "putlocker.best",
+   "sanet.lc",
+   "smarthard.click",
+   "soap2day.day",
+   "soccerworldcup.me",
+   "sportsurge.net",
+   "sportzonline.click",
+   "sticky-sports.cfd",
+   "streameast.ga",
+   "streameastv1.com",
+   "streamed.pk",
+   "streamingnow.mov",
+   "streamion.city",
+   "streams.center",
+   "streamseast.cx",
+   "tvableon.me",
+   "vidsrc.cc",
+   "vidsrc.net",
+   "vidsrc.xyz",
+   "xstreameast.com"
+  ],
+  "regexFilter": "^https?:\\/\\/[-a-z]{5,15}\\.[a-z]{3,}\\/[0-9a-z]{1,20}\\?[0-9A-Za-z]{15,24}=.{35,2000}$"
+ },
+ "id": 1,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "initiatorDomains": [
+   "9animetv.to",
+   "alphatron.tv",
+   "aniwatchtv.to",
+   "bingewatch.to",
+   "cookiewebplay.xyz",
+   "eyespeeled.click",
+   "fxggxt.com",
+   "givemereddit.eu",
+   "rojadirectas.pro",
+   "seriesonline.ac",
+   "sflix.to",
+   "sflix2.to",
+   "shinden.pl",
+   "sporttuna.xyz",
+   "thedaddy.to",
+   "tvids.to"
+  ],
+  "regexFilter": "^https:\\/\\/www\\.[a-z]{5,11}\\.com\\/[a-zA-Z]{1,6}\\/[a-z]{3,6}.*\\.min\\.js",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 2,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "initiatorDomains": [
+   "mixdrop.ag",
+   "thekhatrimaza.soy",
+   "volokit.xyz",
+   "watchkobestreams.info",
+   "xxxpicss.com"
+  ],
+  "regexFilter": "^https:\\/\\/www\\.[a-z]{8,16}\\.com\\/(?:[A-Za-z]+\\/)*(?:[_0-9A-Za-z]{1,20}[-.])*[_0-9A-Za-z]{1,20}\\.js$",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 3,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "initiatorDomains": [
+   "imkan.tv"
+  ],
+  "regexFilter": "^https?:\\/\\/asset.bixjf.com\\/[0-9]{4}\\/ad\\/[0-9].*"
+ },
+ "id": 4,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "initiatorDomains": [
+   "imkan.tv"
+  ],
+  "regexFilter": "^https?:\\/\\/asset.bixjf.com\\/[0-9]{4}\\/[a-z]{2,}\\/[0-9].*(.jpg$)",
+  "resourceTypes": [
+   "image"
+  ]
+ },
+ "id": 5,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "regexFilter": "^https:\\/\\/[0-9a-f]{10}\\.[0-9a-f]{10}\\.com\\/[0-9a-f]{32}\\.js$",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 6,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "regexFilter": "^https?:\\/\\/(?:www\\.|[0-9a-z]{7,10}\\.)?[-0-9a-z]{5,}\\.com\\/\\/?(?:[0-9a-f]{2}\\/){2,3}[0-9a-f]{32}\\.js$",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 7,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "isUrlFilterCaseSensitive": true,
+  "regexFilter": "^https:\\/\\/[a-z]{3,5}\\.[a-z]{10,14}\\.top\\/[a-z]{10,16}\\/[a-z]{5,6}(?:\\?d=\\d)?$",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 8,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "regexFilter": "^https:\\/\\/[a-z]{8,16}\\.com\\/[a-z]{6,20}\\?[a-zA-Z=&,].*&s=.*",
+  "resourceTypes": [
+   "script"
+  ]
+ },
+ "id": 9,
+ "priority": 10
+},
+{
+ "action": {
+  "type": "block"
+ },
+ "condition": {
+  "domainType": "thirdParty",
+  "isUrlFilterCaseSensitive": true,
+  "regexFilter": "^https?:\\/\\/[-a-z]{5,12}\\.[a-z]{3,6}\\/[0-9a-h]{1,17}\\?[0-9a-zA-Z]{1,21}=[%0-9a-zA-Z]{200,1300}",
+  "resourceTypes": [
+   "xmlhttprequest"
+  ]
+ },
+ "id": 10,
+ "priority": 10
+}
+]

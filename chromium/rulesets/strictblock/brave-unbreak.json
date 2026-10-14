@@ -1,0 +1,27 @@
+[
+{
+ "action": {
+  "redirect": {
+   "regexSubstitution": "/strictblock.html#\\0"
+  },
+  "type": "redirect"
+ },
+ "condition": {
+  "regexFilter": "^https?://.*",
+  "requestDomains": [
+   "cuneneifrack.com",
+   "offerimage.com",
+   "peanbowfin.life",
+   "pushsar.com",
+   "rtmark.net",
+   "udeteknvr.com",
+   "veta.naver.com"
+  ],
+  "resourceTypes": [
+   "main_frame"
+  ]
+ },
+ "id": 1,
+ "priority": 29
+}
+]

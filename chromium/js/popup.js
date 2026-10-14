@@ -42,9 +42,25 @@ function renderAdminRules() {
 
 const BLOCKING_MODE_MAX = 3;
 
+// blackice quick profiles: same mode values as the slider, friendlier face.
+function renderProfiles(level) {
+    for ( const button of document.querySelectorAll('#quickProfiles button[data-profile]') ) {
+        dom.cl.toggle(button, 'active', parseInt(button.dataset.profile, 10) === level);
+    }
+}
+
+function pulseModeSlider() {
+    const modeSlider = qs$('.filteringModeSlider');
+    dom.cl.remove(modeSlider, 'bi-pulse');
+    void modeSlider.offsetWidth;
+    dom.cl.add(modeSlider, 'bi-pulse');
+}
+
 async function setFilteringMode(level, commit = false) {
     const modeSlider = qs$('.filteringModeSlider');
     modeSlider.dataset.level = level;
+    renderProfiles(level);
+    pulseModeSlider();
     if ( qs$('.filteringModeSlider.moving') === null ) {
         dom.text(
             '#filteringModeText > span:nth-of-type(1)',
@@ -191,6 +207,22 @@ dom.on(
     }
 );
 
+// blackice quick profiles ride the exact same code path as the slider.
+//
+// NOTE: these are direct listeners, not dom.on delegation. dom.on's
+// delegated handler only fires when event.target itself matches the
+// selector, so clicks landing on the <b>/<span> children inside the
+// buttons were silently swallowed and the mode never changed.
+for ( const button of document.querySelectorAll('#quickProfiles button[data-profile]') ) {
+    button.addEventListener('click', ev => {
+        if ( ev.isTrusted !== true ) { return; }
+        const modeSlider = qs$('.filteringModeSlider');
+        modeSlider.dataset.levelBefore = modeSlider.dataset.level;
+        const level = parseInt(ev.currentTarget.dataset.profile, 10);
+        setFilteringMode(level, true);
+    });
+}
+
 if ( dom.cl.has(dom.html, 'mobile') === false ) {
     dom.on('.filteringModeSlider',
         'mouseenter',
@@ -215,13 +247,25 @@ if ( dom.cl.has(dom.html, 'mobile') === false ) {
 
 /******************************************************************************/
 
-dom.on('#gotoMatchedRules', 'click', ev => {
-    if ( ev.isTrusted !== true ) { return; }
-    if ( ev.button !== 0 ) { return; }
+function showMatchedRules() {
     sendMessage({
         what: 'showMatchedRules',
         tabId: currentTab.id,
     });
+}
+
+dom.on('#gotoMatchedRules', 'click', ev => {
+    if ( ev.isTrusted !== true ) { return; }
+    if ( ev.button !== 0 ) { return; }
+    showMatchedRules();
+});
+
+// blackice: the hero blocked count opens matched rules too.
+dom.on('#blockedHero', 'click', ev => {
+    if ( ev.isTrusted !== true ) { return; }
+    if ( ev.button !== 0 ) { return; }
+    if ( dom.cl.has('#blockedHero', 'enabled') === false ) { return; }
+    showMatchedRules();
 });
 
 /******************************************************************************/
@@ -295,6 +339,92 @@ dom.on('#gotoUnpicker', 'click', ( ) => {
 
 /******************************************************************************/
 
+// blackice: hero blocked count for this tab, read from the real badge text,
+// with a count-up instead of a jump. When there is nothing to show, the
+// hero stays hidden and the empty state speaks instead. Never fake numbers.
+async function renderBlockedHero() {
+    let count = NaN;
+    try {
+        const text = await browser.action.getBadgeText({ tabId: currentTab.id });
+        count = parseInt(text, 10);
+    } catch {
+    }
+    if ( Number.isNaN(count) || count <= 0 ) {
+        dom.attr('#blockedEmpty', 'hidden', null);
+        return;
+    }
+    // blackice: keep the real count around for the glitching status line.
+    biStatusBlocked = count;
+    dom.attr('#blockedHero', 'hidden', null);
+    const elem = qs$('#blockedCount');
+    const duration = 500;
+    const start = self.performance.now();
+    const step = now => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        dom.text(elem, `${Math.round(count * eased)}`);
+        if ( t < 1 ) { self.requestAnimationFrame(step); }
+    };
+    self.requestAnimationFrame(step);
+}
+
+/******************************************************************************/
+
+// blackice: rotating glitch status lines under the popup header. The
+// intruders line uses the real badge count and only appears when something
+// was actually blocked on this tab — never an invented number. Under
+// prefers-reduced-motion the static "wired secure" from the HTML stays.
+const biStatusKeys = [
+    'popupStatusLine',
+    'popupStatusLine2',
+    'popupStatusLine3',
+    'popupStatusLine4',
+    'popupStatusLine5',
+    'popupStatusLine6',
+    'popupStatusLine7',
+    'popupStatusLine8',
+    'popupStatusLine9',
+    'popupStatusLine10',
+    'popupStatusLine11',
+    'popupStatusLine12',
+    'popupStatusLine13',
+    'popupStatusLine14',
+    'popupStatusLine15',
+];
+let biStatusIndex = 0;
+let biStatusBlocked = 0;
+
+function biStatusLines() {
+    const lines = biStatusKeys.map(key => i18n$(key));
+    if ( biStatusBlocked > 0 ) {
+        lines.splice(1, 0,
+            i18n$('popupStatusIntruders').replace('$1', `${biStatusBlocked}`));
+    }
+    return lines;
+}
+
+function renderBiStatusLine() {
+    const span = qs$('#biStatusLine > span');
+    if ( span === null ) { return; }
+    const lines = biStatusLines();
+    biStatusIndex = (biStatusIndex + 1) % lines.length;
+    dom.text(span, lines[biStatusIndex]);
+    // Re-kick the CSS animation so the incoming line glitches in.
+    span.style.animation = 'none';
+    void span.offsetWidth;
+    span.style.animation = '';
+}
+
+function startBiStatusLine() {
+    if ( self.matchMedia !== undefined &&
+         self.matchMedia('(prefers-reduced-motion: reduce)').matches === true ) {
+        return;
+    }
+    self.setInterval(renderBiStatusLine, 4600);
+}
+
+/******************************************************************************/
+
 async function init() {
     const [ tab ] = await browser.tabs.query({
         active: true,
@@ -329,17 +459,23 @@ async function init() {
 
     dom.text('#hostname', punycode.toUnicode(tabURL.hostname));
 
-    dom.cl.toggle('#gotoMatchedRules', 'enabled',
+    // blackice: the hero count shares the matched-rules gating.
+    const matchedRulesAllowed =
         popupPanelData.isSideloaded === true &&
         popupPanelData.developerMode &&
         typeof currentTab.id === 'number' &&
-        isNaN(currentTab.id) === false
-    );
+        isNaN(currentTab.id) === false;
+    dom.cl.toggle('#gotoMatchedRules', 'enabled', matchedRulesAllowed);
+    dom.cl.toggle('#blockedHero', 'enabled', matchedRulesAllowed);
 
     const isHTTP = url.protocol === 'http:' || url.protocol === 'https:';
     dom.cl.toggle(dom.root, 'isHTTP', isHTTP);
 
     dom.cl.toggle('#gotoUnpicker', 'enabled', popupPanelData.hasCustomFilters);
+
+    renderBlockedHero().catch(( ) => {});
+
+    startBiStatusLine();
 
     return true;
 }
@@ -360,4 +496,3 @@ async function tryInit() {
 tryInit();
 
 /******************************************************************************/
-

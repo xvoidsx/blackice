@@ -20,6 +20,7 @@
 */
 
 import { dom, qs$ } from './dom.js';
+import { i18n$ } from './i18n.js';
 import { sendMessage } from './ext.js';
 
 /******************************************************************************/
@@ -44,5 +45,14 @@ for ( const entry of (entries || []) ) {
 
 dom.empty('#matchedEntries');
 qs$('#matchedEntries').append(fragment);
+
+// blackice: plain-language summary up top; the technical table stays intact.
+{
+    const n = (entries || []).filter(entry => entry instanceof Object).length;
+    const summary = n === 0
+        ? i18n$('matchedRulesEmpty')
+        : i18n$('matchedRulesSummary').replace('{{count}}', `${n}`);
+    dom.text('#matchedSummary', summary);
+}
 
 /******************************************************************************/

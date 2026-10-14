@@ -26,7 +26,7 @@ import {
     webextFlavor,
 } from './ext.js';
 import { faIconsInit } from './fa-icons.js';
-import { i18n } from './i18n.js';
+import { i18n, i18n$ } from './i18n.js';
 
 /******************************************************************************/
 
@@ -34,7 +34,10 @@ dom.body.dataset.platform = webextFlavor;
 
 {
     const manifest = runtime.getManifest();
-    dom.text('#aboutNameVer', `${manifest.name} ${manifest.version}`);
+    dom.text(
+        '#aboutNameVer',
+        `${manifest.name} ${manifest.version} (${i18n$('aboutBasedOn')} ${manifest.version})`
+    );
 }
 
 dom.attr('a', 'target', '_blank');

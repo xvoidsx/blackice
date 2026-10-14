@@ -316,6 +316,20 @@ dom.on('#disableWarning', 'change', ev => {
 
 dom.on('#proceed', 'click', ( ) => { proceed(); });
 
+/******************************************************************************/
+
+// blackice personality: a rotating one-liner in our own voice.
+{
+    const quips = [];
+    for ( let i = 1; i <= 6; i++ ) {
+        const quip = i18n$(`strictblockQuip${i}`);
+        if ( typeof quip === 'string' && quip !== '' ) { quips.push(quip); }
+    }
+    if ( quips.length !== 0 ) {
+        dom.text('#blackiceQuip', quips[Math.floor(Math.random() * quips.length)]);
+    }
+}
+
 dom.cl.remove(dom.body, 'loading');
 
 /******************************************************************************/

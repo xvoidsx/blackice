@@ -1,7 +1,13 @@
 :root#ubol-zapper {
     --quit-button-size: max(4em, min(6em, calc(100vw / 8), calc(100vh / 8)));
-    --ubol-overlay-fill: rgba(255,255,63,0.10);
-    --ubol-overlay-border: #FF0;
+    /* blackice: zap-target highlight in neon pink instead of upstream yellow */
+    --ubol-overlay-fill: rgba(255,16,240,0.12);
+    --ubol-overlay-border: #ff10f0;
+}
+
+/* blackice: neon glow on the zap-target highlight outline */
+:root#ubol-zapper svg#overlay > path + path {
+    filter: drop-shadow(0 0 6px rgba(255,16,240,0.9));
 }
 
 #ubol-zapper aside {

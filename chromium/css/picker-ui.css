@@ -1,6 +1,12 @@
 :root#ubol-picker {
-    --ubol-overlay-fill: rgba(255,64,64,0.10);
-    --ubol-overlay-border: #F00;
+    /* blackice: pick-target highlight in neon pink instead of upstream red */
+    --ubol-overlay-fill: rgba(255,16,240,0.10);
+    --ubol-overlay-border: #ff10f0;
+}
+
+/* blackice: neon glow on the pick-target highlight outline */
+:root#ubol-picker svg#overlay > path + path {
+    filter: drop-shadow(0 0 6px rgba(255,16,240,0.9));
 }
 
 #ubol-picker.paused svg#overlay {

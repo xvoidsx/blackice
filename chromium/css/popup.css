@@ -13,10 +13,7 @@
 }
 
 :root {
-    --popup-min-width: calc(
-        var(--filtering-mode-slider-width) +
-        var(--filtering-mode-button-size) / 2
-    );
+    --popup-min-width: 360px;
 }
 
 :root body,
@@ -79,12 +76,10 @@ body.nodata .needData {
 
 #hostname {
     align-items: center;
-    background-color: var(--popup-toolbar-surface);
     display: flex;
-    justify-content: center;
-    min-height: calc(var(--font-size) * 3);
-    padding: 0 var(--popup-gap-extra-thin);
-    text-align: center;
+    justify-content: flex-start;
+    min-height: calc(var(--font-size) * 2);
+    text-align: left;
     word-break: break-all;
 }
 #hostname > span {
@@ -92,6 +87,132 @@ body.nodata .needData {
 }
 #hostname > span + span {
     font-weight: 600;
+}
+
+/* blackice command card header */
+#biPopupHeader {
+    align-items: center;
+    background-color: var(--popup-toolbar-surface);
+    display: flex;
+    gap: 0.7em;
+    padding: 0.7em 0.9em;
+}
+#biPopupShard {
+    flex-shrink: 0;
+    height: 40px;
+    width: 40px;
+}
+#biPopupTitles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15em;
+    min-width: 0;
+}
+#biPopupBrand {
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+}
+
+/* blackice status line: mostly quiet tagline, brief RGB-split glitch */
+#biStatusLine {
+    color: var(--ink-3);
+    font-size: 0.7em;
+    letter-spacing: 0.4em;
+    opacity: 0.65;
+    padding: 0.45em 0 0.1em;
+    text-align: center;
+    text-indent: 0.4em;
+    text-transform: uppercase;
+}
+#biStatusLine > span {
+    display: inline-block;
+    animation: biGlitch 6s linear infinite;
+}
+@keyframes biGlitch {
+    /* glitch burst lands at the start of the cycle so a re-kicked
+       animation makes the incoming line glitch in */
+    0% {
+        opacity: 1;
+        text-shadow: -2px 0 #ff10f0, 2px 0 #00ffff;
+        transform: translateX(-1px) skewX(-4deg);
+    }
+    3% {
+        opacity: 1;
+        text-shadow: 2px 0 #ff10f0, -2px 0 #00ffff;
+        transform: translateX(1px);
+    }
+    6% {
+        opacity: 0.7;
+        text-shadow: -1px 0 #39ff14, 1px 0 #ff10f0;
+        transform: none;
+    }
+    9%, 100% {
+        opacity: 1;
+        text-shadow: none;
+        transform: none;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #biStatusLine > span {
+        animation: none;
+    }
+}
+
+/* blackice hero blocked count */
+#blockedHero {
+    align-items: baseline;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--surface-2);
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    gap: 0.6em;
+    justify-content: center;
+    padding: 0.9em 0.5em 0.7em;
+    width: 100%;
+}
+#blockedHero:not(.enabled) {
+    cursor: default;
+}
+#blockedCount {
+    font-size: 2.6em;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+#blockedHeroLabel {
+    font-size: 0.9em;
+    opacity: 0.85;
+}
+#blockedEmpty {
+    border-bottom: 1px solid var(--surface-2);
+    font-style: italic;
+    opacity: 0.75;
+    padding: 0.9em 0.5em;
+    text-align: center;
+}
+
+/* blackice quick profiles keep their buttons, roomier card */
+#quickProfiles {
+    padding: 0.6em 0.9em 0;
+}
+
+/* tool buttons as a grid instead of a vertical list */
+.toolMenu {
+    border-top: 1px solid var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    margin: 0.5em 0;
+    padding: 0.5em 0.9em 0;
+}
+.toolGrid {
+    display: grid;
+    gap: 0.3em;
+    grid-template-columns: 1fr 1fr;
 }
 
 body[data-forbid~="filteringMode"] .filteringModeSlider {
@@ -155,24 +276,26 @@ body.needReload #refresh {
     line-height: calc(var(--font-size) * 1.8);
     margin-inline-start: 0.5em;
 }
-.toolMenu > .tool {
+.toolGrid > .tool {
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
-    padding: 0.5em 0.5em 0.5em 0;
+    gap: 0.5em;
+    padding: 0.55em 0.6em;
     unicode-bidi: embed;
 }
-.toolMenu > .tool:hover {
+.toolGrid > .tool:hover {
     color: var(--ink-1);
       fill: var(--ink-1);
 }
-.toolMenu > .tool:not(.enabled) {
+.toolGrid > .tool:not(.enabled) {
     display: none;
 }
-.toolMenu > .tool .fa-icon {
+.toolGrid > .tool .fa-icon {
     font-size: 1.4em;
     min-width: 1.4em;
 }
-.toolMenu > .tool [data-i18n] {
+.toolGrid > .tool [data-i18n] {
     flex-grow: 1;
 }
 

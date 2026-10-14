@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark" />
 <link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/blackice.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/fa-icons.css">
 <link rel="stylesheet" href="css/filtering-mode.css">
@@ -16,7 +17,32 @@
 <body class="loading busy">
 
 <main>
-    <div id="hostname"><span></span>&shy;<span></span></div>
+    <!-- blackice command card header -->
+    <header id="biPopupHeader">
+        <img id="biPopupShard" src="img/icon_64.png" alt="">
+        <div id="biPopupTitles">
+            <div id="biPopupBrand">blackice</div>
+            <div id="hostname"><span></span>&shy;<span></span></div>
+        </div>
+    </header>
+    <!-- -------- -->
+    <!-- blackice status line: quiet tagline, brief RGB-split glitch -->
+    <div id="biStatusLine"><span data-i18n="popupStatusLine">_</span></div>
+    <!-- hero blocked count: tappable, opens matched rules -->
+    <button id="blockedHero" type="button" class="needData" hidden>
+        <span id="blockedCount">0</span>
+        <span id="blockedHeroLabel" data-i18n="popupBlockedLabel">_</span>
+    </button>
+    <div id="blockedEmpty" class="needData" hidden><span data-i18n="popupEmptyState">_</span></div>
+    <!-- -------- -->
+    <div id="quickProfiles" class="needData">
+        <label data-i18n="popupProfilesLabel">_</label>
+        <div class="profileButtons">
+            <button type="button" data-profile="3"><b data-i18n="profileGhostName">_</b><span data-i18n="profileGhostDesc">_</span></button>
+            <button type="button" data-profile="2"><b data-i18n="profileStandardName">_</b><span data-i18n="profileStandardDesc">_</span></button>
+            <button type="button" data-profile="1"><b data-i18n="profilePermissiveName">_</b><span data-i18n="profilePermissiveDesc">_</span></button>
+        </div>
+    </div>
     <!-- -------- -->
     <div class="filteringModeSlider needData">
         <div class="filteringModeButton"><div></div></div>
@@ -30,22 +56,24 @@
     <!-- -------- -->
     <div class="toolMenu localTools needHTTP">
         <label data-i18n="popupLocalToolsLabel"></label>
-        <span id="gotoZapper" class="tool enabled" tabindex="0">
-            <span class="fa-icon">bolt</span>
-            <span data-i18n="zapperTipEnter">_</span>
-        </span>
-        <span id="gotoPicker" class="tool enabled" tabindex="0">
-            <span class="fa-icon">eye-slash</span>
-            <span data-i18n="pickerTipEnter">_</span>
-        </span>
-        <span id="gotoUnpicker" class="tool" tabindex="0">
-            <span class="fa-icon">eye-open</span>
-            <span data-i18n="unpickerTipEnter">_</span>
-        </span>
-        <span id="gotoReport" class="tool enabled" tabindex="0">
-            <span class="fa-icon">comment-alt</span>
-            <span data-i18n="popupTipReport">_</span>
-        </span>
+        <div class="toolGrid">
+            <span id="gotoZapper" class="tool enabled" tabindex="0">
+                <span class="fa-icon">bolt</span>
+                <span data-i18n="zapperTipEnter">_</span>
+            </span>
+            <span id="gotoPicker" class="tool enabled" tabindex="0">
+                <span class="fa-icon">eye-slash</span>
+                <span data-i18n="pickerTipEnter">_</span>
+            </span>
+            <span id="gotoUnpicker" class="tool" tabindex="0">
+                <span class="fa-icon">eye-open</span>
+                <span data-i18n="unpickerTipEnter">_</span>
+            </span>
+            <span id="gotoReport" class="tool enabled" tabindex="0">
+                <span class="fa-icon">comment-alt</span>
+                <span data-i18n="popupTipReport">_</span>
+            </span>
+        </div>
     </div>
     <!-- -------- -->
     <div class="toolRibbon globalTools">

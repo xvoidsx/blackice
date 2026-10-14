@@ -28,6 +28,11 @@
         "path": "/rulesets/main/ublock-filters.json"
       },
       {
+        "id": "brave-unbreak",
+        "enabled": true,
+        "path": "/rulesets/main/brave-unbreak.json"
+      },
+      {
         "id": "easylist",
         "enabled": true,
         "path": "/rulesets/main/easylist.json"
@@ -330,11 +335,11 @@
     "unlimitedStorage",
     "userScripts"
   ],
-  "short_name": "uBO Lite",
+  "short_name": "blackice",
   "storage": {
     "managed_schema": "managed_storage.json"
   },
-  "version": "2026.1014.0613",
+  "version": "2026.1014.619",
   "web_accessible_resources": [
     {
       "resources": [

@@ -90,6 +90,60 @@ function renderDefaultMode() {
 
 /******************************************************************************/
 
+// blackice command deck: stat cards wired only to real extension data.
+// Anything we cannot measure honestly shows a clean empty state.
+
+function animateDeckValue(elem, target) {
+    const duration = 600;
+    const start = self.performance.now();
+    const step = now => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        dom.text(elem, Math.round(target * eased).toLocaleString());
+        if ( t < 1 ) { self.requestAnimationFrame(step); }
+    };
+    self.requestAnimationFrame(step);
+}
+
+async function renderDeck() {
+    const data = self.cachedRulesetData;
+    // Filtering rules active + filter lists on, from real ruleset details.
+    const enabled = new Set(data.enabledRulesets || []);
+    let ruleCount = 0;
+    for ( const details of (data.rulesetDetails || []) ) {
+        if ( enabled.has(details.id) === false ) { continue; }
+        ruleCount += (details.rules?.plain || 0) + (details.rules?.regex || 0);
+    }
+    dom.text('#deckRulesValue', ruleCount.toLocaleString());
+    dom.text('#deckListsValue', `${enabled.size}`);
+    // Default protection level, using the real mode name.
+    const modeName = i18n.getMessage(`filteringMode${data.defaultFilteringMode}Name`);
+    dom.text('#deckModeValue', modeName || '–');
+    // Blocked on open tabs: sum of the real per-tab badge counts.
+    let total = 0;
+    let known = false;
+    try {
+        const tabs = await browser.tabs.query({});
+        for ( const tab of tabs ) {
+            const text = await browser.action.getBadgeText({ tabId: tab.id });
+            const n = parseInt(text, 10);
+            if ( Number.isNaN(n) ) { continue; }
+            total += n;
+            known = true;
+        }
+    } catch {
+    }
+    if ( known ) {
+        animateDeckValue(qs$('#deckBlockedValue'), total);
+        dom.attr('#deckBlockedSub', 'hidden', '');
+    } else {
+        dom.text('#deckBlockedValue', '–');
+        dom.attr('#deckBlockedSub', 'hidden', null);
+    }
+}
+
+/******************************************************************************/
+
 async function onFilteringModeChange(ev) {
     const input = ev.target;
     const newLevel = parseInt(input.value, 10);
@@ -342,6 +396,7 @@ sendMessage({
     try {
         renderAdminRules();
         renderWidgets();
+        renderDeck().catch(reason => console.error(reason));
     } catch(reason) {
         console.error(reason);
     } finally {

@@ -6,6 +6,7 @@
 <meta name="color-scheme" content="light dark" />
 <title data-i18n="dashboardName"></title>
 <link rel="stylesheet" href="css/default.css">
+<link rel="stylesheet" href="css/blackice.css">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/fa-icons.css">
 <link rel="stylesheet" href="css/dashboard.css">
@@ -24,7 +25,7 @@
 <!-- -------- -->
 <header>
     <nav id="dashboard-nav">
-        <span class="logo"><img data-i18n-title="extName" src="img/ublock.svg" alt="uBO Lite"></span><!--
+        <span class="logo"><img data-i18n-title="extName" src="img/icon_128.png" alt="blackice"></span><!--
      --><button class="tabButton" type="button" data-pane="settings" data-i18n="settingsPageName" tabindex="0"></button><!--
      --><button class="tabButton" type="button" data-pane="rulesets" data-i18n="aboutFilterLists" tabindex="0"></button><!--
      --><button class="tabButton" type="button" data-pane="filters" data-i18n="customFiltersPageName"tabindex="0"></button><!--
@@ -41,6 +42,28 @@
 
 <!-- -------- -->
 <section data-pane="settings">
+    <div id="commandDeck">
+        <h3 data-i18n="deckTitle">_</h3>
+        <div class="deckCards">
+            <div class="deckCard">
+                <div class="deckValue" id="deckBlockedValue">&ndash;</div>
+                <div class="deckLabel" data-i18n="deckBlockedLabel">_</div>
+                <div class="deckSub" id="deckBlockedSub" data-i18n="deckBlockedEmpty">_</div>
+            </div>
+            <div class="deckCard">
+                <div class="deckValue" id="deckRulesValue">&ndash;</div>
+                <div class="deckLabel" data-i18n="deckRulesLabel">_</div>
+            </div>
+            <div class="deckCard">
+                <div class="deckValue" id="deckListsValue">&ndash;</div>
+                <div class="deckLabel" data-i18n="deckListsLabel">_</div>
+            </div>
+            <div class="deckCard">
+                <div class="deckValue" id="deckModeValue">&ndash;</div>
+                <div class="deckLabel" data-i18n="deckModeLabel">_</div>
+            </div>
+        </div>
+    </div>
     <div>
         <h3 data-i18n="defaultFilteringModeSectionLabel"></h3>
         <p data-i18n="defaultFilteringModeDescription"></p>
@@ -115,6 +138,10 @@
 <!-- -------- -->
 <section data-pane="rulesets">
     <div id="lists"></div>
+    <aside id="xvoidsxLists">
+        <h3 data-i18n="wiredListsTitle">_</h3>
+        <p data-i18n="wiredListsSoon">_</p>
+    </aside>
     <aside>
         <p class="userScriptsInfo"><span data-i18n="customListImportUserScriptsInfo"></span> <span data-i18n="userScriptsInfo"></span></p>
         <details class="importRulesetURL"><summary data-i18n="customListImportLabel">_</summary>
@@ -170,6 +197,16 @@
         <div id="aboutNameVer" class="li"></div>
         <div class="liul">
             <div class="li">Copyright (c) Raymond Hill 2014-present</div>
+            <div class="li" data-i18n="aboutXvoidsxCopyright">_</div>
+            <div class="li"><span data-i18n="aboutForkNotice"></span></div>
+        </div>
+        <div class="li"><span data-i18n="aboutXvoidsxLinks"></span></div>
+        <div class="liul">
+            <div class="li"><a href="https://github.com/xvoidsx/navi">navi — the distro</a></div>
+            <div class="li"><a href="https://xvoidsx.org">xvoidsx.org</a></div>
+            <div class="li"><a href="https://neighborli.xyz">neighborli</a></div>
+            <div class="li"><a href="https://rav3ndust.xyz">rav3ndust.xyz</a></div>
+            <div class="li"><a href="https://github.com/sponsors/rav3ndust">Sponsor xvoidsx</a></div>
         </div>
         <div class="li"><a href="https://github.com/uBlockOrigin/uBOL-home/wiki/Privacy-policy" data-i18n="aboutPrivacyPolicy"></a></div>
         <div class="li"><a href="https://github.com/uBlockOrigin/uBOL-home/wiki" data-i18n="aboutDocumentation"></a></div>
@@ -276,6 +313,7 @@
 </template>
 
 <script src="lib/codemirror/cm6.bundle.ubol.min.js"></script>
+<script src="js/katakana-rain.js"></script>
 <script src="js/theme.js" type="module"></script>
 <script src="js/fa-icons.js" type="module"></script>
 <script src="js/i18n.js" type="module"></script>

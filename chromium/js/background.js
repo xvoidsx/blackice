@@ -896,3 +896,19 @@ browser.alarms.onAlarm.addListener(alarm => {
         processDueJobs(onMessage);
     });
 });
+
+/******************************************************************************/
+
+// blackice: first-run welcome page. Shown once per installation, on a stored
+// flag so it can never nag. Wrapped defensively: nothing here may break the
+// service worker's startup.
+runtime.onInstalled.addListener(async details => {
+    try {
+        if ( details.reason !== 'install' ) { return; }
+        const welcomed = await localRead('blackiceWelcomed');
+        if ( welcomed === true ) { return; }
+        await localWrite('blackiceWelcomed', true);
+        await browser.tabs.create({ url: runtime.getURL('/welcome.html') });
+    } catch {
+    }
+});
