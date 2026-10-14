@@ -1,9 +1,16 @@
 # blackice
-<img width="1328" height="670" alt="image" src="https://github.com/user-attachments/assets/27fec579-be9c-46c3-a401-7914c975b4f7" />
+<img width="1328" height="670" alt="image" src="https://github.com/user-attachments/assets/27fec579-be9c-46c3-a401-7914c975b4f" />
 
 ###### the Blackice welcome page, greeting you and inviting you to open the dashboard
 
-A Manifest V3 ad and tracker blocker with a nightshadeNeon soul. Forged on top of the wonderful [Ublock Origin Lite](https://github.com/uBlockOrigin/uBOL-home).
+A Manifest V3 ad and tracker blocker with a nightshadeNeon soul. Forged on top of the wonderful [Ublock Origin Lite](https://github.com/uBlockOrigin/uBOL-home) — with [Brave's filter lists](https://github.com/brave/adblock-lists) now standing alongside uBO's. Block all ads and trackers, as much as possible, no matter what.
+
+## Get blackice
+
+- **Chrome Web Store:** [blackice](https://chromewebstore.google.com/detail/blackice/nncobpmjfngafidkngebojkabaabbkhm?authuser=0&hl=en)
+- **Edge Add-ons:** pending — in review
+- **Firefox:** coming soon
+- **Manual install / sideload:** grab the zip for your browser from [GitHub Releases](https://github.com/xvoidsx/blackice/releases), unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
 
 ## prettier privacy
 
@@ -26,7 +33,7 @@ Four profiles — *Off*, *Permissive*, *Standard*, *Ghost* — live per-tab bloc
 - The number of filter lists that are turned on
 - The **protection mode** that is currently being used
 
-Past the Command Deck, the dashboard carries the full uBlock Origin Lite toolkit in Blackice dress: a **Filter Lists** page for choosing which curated lists stand guard, **Custom Filters** for writing your own rules, and the settings themselves — all under the katakana rain.
+Past the Command Deck, the dashboard carries the full uBlock Origin Lite toolkit in Blackice dress: a **Filter Lists** page for choosing which curated lists stand guard (uBO's lists plus Brave's — including `brave-unbreak`, which keeps YouTube playing nice), **Custom Filters** for writing your own rules, and the settings themselves — all under the katakana rain.
 
 
 
@@ -36,7 +43,12 @@ Blackice would not exist without [Raymond Hill](https://github.com/gorhill)
 and the uBlock Origin contributors. The blocking engine, filter-list
 machinery, and DNR conversion are theirs, unchanged.
 
+It also stands on the work of the [Brave](https://brave.com) team, whose
+[adblock lists](https://github.com/brave/adblock-lists) ship alongside
+uBO's in every Blackice build.
+
 - Upstream engine: © Raymond Hill / uBlock Origin contributors
+- Brave filter lists: © Brave Software
 - Blackice modifications (UI, branding, defaults): © xvoidsx
 - This is a fork of uBlock Origin Lite, not an official uBlock project.
 
@@ -63,13 +75,25 @@ Load it via `chrome://extensions` → Developer mode → Load unpacked.
 Manifest versions are date-based (`2026.922.1113` style); the version on the
 extension card in `chrome://extensions` is always ground truth.
 
+## Releasing
+
+Releases are built automatically by the `create_release.yml` GitHub Actions
+workflow — it compiles all four platforms (Chromium, Edge, Firefox, Safari)
+and attaches the zips to a GitHub Release. Artifacts are named
+`blackice-{platform}-{version}.zip` (e.g. `blackice-chromium-2026.1014.625.zip`;
+Firefox ships as `.xpi`).
+
+Store submissions (Chrome Web Store, Edge Add-ons, Mozilla AMO) are manual
+for now — see AGENTS.md for the automation plan.
+
 ## Notes
 
 - Do not run Blackice alongside uBlock Origin Lite or uBlock Origin —
   they will fight over the same requests.
-- A Firefox (MV3) target exists in the tree but is not yet packaged or
-  tested; Chromium is the supported platform for now.
-- Filter lists ship as curated defaults; xvoidsx-maintained lists are
+- Firefox (MV3) ships as a signed `.xpi` in every release; the extension
+  name is `blackice` and the ID is `rav3nwing@proton.me`.
+- Filter lists ship as curated defaults: uBO's lists plus Brave's
+  (`brave-unbreak` and more to come). xvoidsx-maintained lists are
   planned and will always be real lists, never placeholders.
 
 ## Privacy
