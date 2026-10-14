@@ -13,5 +13,7 @@
 
 When a new release is created, there is a delay before it becomes available in the Chrome Web Store due to their review process. This is normal.
 
-- Chromium-based browsers: download the `blackice_%tag%.chromium.zip` below, unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
-- Microsoft Edge: same zip works — load unpacked via `edge://extensions` → Developer mode.
+- Chromium: download the `blackice-chromium-%tag%.zip` below, unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
+- Microsoft Edge: download the `blackice-edge-%tag%.zip` below, unzip, then load unpacked via `edge://extensions` → Developer mode.
+- Firefox: download the `blackice-firefox-%tag%.xpi` below, then install via `about:addons` → gear icon → Install Add-on From File.
+- Safari: download the `blackice-safari-%tag%.zip` below.
