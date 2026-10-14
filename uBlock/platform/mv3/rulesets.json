@@ -15,6 +15,16 @@
     "homeURL": "https://github.com/uBlockOrigin/uAssets"
   },
   {
+    "id": "brave-unbreak",
+    "name": "Brave – Unbreak",
+    "group": "default",
+    "enabled": true,
+    "urls": [
+      "https://raw.githubusercontent.com/brave/adblock-lists/master/brave-unbreak.txt"
+    ],
+    "homeURL": "https://github.com/brave/adblock-lists"
+  },
+  {
     "id": "easylist",
     "name": "EasyList",
     "group": "default",
@@ -39,7 +49,9 @@
     "name": "Peter Lowe – Ads, trackers, and more",
     "group": "default",
     "enabled": true,
-    "excludedPlatforms": [ "safari" ],
+    "excludedPlatforms": [
+      "safari"
+    ],
     "urls": [
       "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=1&mimetype=plaintext"
     ],
@@ -51,7 +63,9 @@
     "group": "malware",
     "enabled": true,
     "trusted": true,
-    "excludedPlatforms": [ "safari" ],
+    "excludedPlatforms": [
+      "safari"
+    ],
     "urls": [
       "https://ublockorigin.github.io/uAssets/filters/badware.min.txt"
     ],
@@ -62,7 +76,9 @@
     "name": "Malicious URL Blocklist",
     "group": "malware",
     "enabled": true,
-    "excludedPlatforms": [ "safari" ],
+    "excludedPlatforms": [
+      "safari"
+    ],
     "urls": [
       "https://malware-filter.gitlab.io/malware-filter/urlhaus-filter-hosts.txt"
     ],
@@ -95,7 +111,9 @@
     "name": "AdGuard/uBO – URL Tracking Protection",
     "group": "privacy",
     "enabled": false,
-    "excludedPlatforms": [ "safari" ],
+    "excludedPlatforms": [
+      "safari"
+    ],
     "urls": [
       "https://ublockorigin.github.io/uAssets/filters/privacy-removeparam.txt"
     ],
@@ -513,7 +531,9 @@
     "name": "🇵🇱pl: CERT.PL's Warning List",
     "tags": "malware polish polski",
     "enabled": false,
-    "excludedPlatforms": [ "safari" ],
+    "excludedPlatforms": [
+      "safari"
+    ],
     "urls": [
       "https://hole.cert.pl/domains/v2/domains_ublock.txt"
     ],
