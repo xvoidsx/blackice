@@ -40,11 +40,11 @@ jobs:
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh chromium ${{ env.TAGNAME }} before=$UBOL_REPO_DIR
           # blackice: strip remote-script-injecting scriptlets (Chrome Web Store MV3 policy)
-          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/blackice.chromium"
-          echo "CHROMIUM_PACKAGE=uBOLite_${{ env.TAGNAME }}.chromium.zip" >> $GITHUB_ENV
+          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/uBOLite.chromium"
+          echo "CHROMIUM_PACKAGE=blackice-chromium-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
           rm -rf chromium
-          mv "$UBLOCK_REPO_DIR/dist/build/blackice.chromium" chromium
+          mv "$UBLOCK_REPO_DIR/dist/build/uBOLite.chromium" chromium
       # Edge
       - name: Build Edge uBOLite
         env:
@@ -53,8 +53,8 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh edge ${{ env.TAGNAME }}
-          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/blackice.edge"
-          echo "EDGE_PACKAGE=uBOLite_${{ env.TAGNAME }}.edge.zip" >> $GITHUB_ENV
+          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/uBOLite.edge"
+          echo "EDGE_PACKAGE=blackice-edge-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
       # Firefox
       - name: Build Firefox uBOLite
@@ -64,8 +64,8 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh firefox ${{ env.TAGNAME }}
-          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/blackice.firefox"
-          echo "FIREFOX_PACKAGE=uBOLite_${{ env.TAGNAME }}.firefox.xpi" >> $GITHUB_ENV
+          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/uBOLite.firefox"
+          echo "FIREFOX_PACKAGE=blackice-firefox-${{ env.TAGNAME }}.xpi" >> $GITHUB_ENV
           cd - > /dev/null
       # Safari
       - name: Build Safari uBOLite
@@ -75,8 +75,8 @@ jobs:
           UBOL_REPO_DIR=$(pwd)
           cd $UBLOCK_REPO_DIR
           tools/make-mv3.sh safari ${{ env.TAGNAME }}
-          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/blackice.safari"
-          echo "SAFARI_PACKAGE=uBOLite_${{ env.TAGNAME }}.safari.zip" >> $GITHUB_ENV
+          bash "$UBOL_REPO_DIR/tools/sanitize-scriptlets.sh" "$UBLOCK_REPO_DIR/dist/build/uBOLite.safari"
+          echo "SAFARI_PACKAGE=blackice-safari-${{ env.TAGNAME }}.zip" >> $GITHUB_ENV
           cd - > /dev/null
       - name: Commit uBOLite MV3 package files
         # https://github.com/marketplace/actions/github-action-for-committing-changes-to-a-repository
