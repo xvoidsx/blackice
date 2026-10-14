@@ -197,6 +197,12 @@ elif [ "$PLATFORM" = "safari" ]; then
     node platform/mv3/safari/patch-extension.js packageDir="$UBOL_DIR"
 fi
 
+# blackice: strip remote-script-injecting scriptlets (Chrome Web Store MV3 policy)
+if [ -x "$BEFORE/tools/sanitize-scriptlets.sh" ]; then
+    echo "*** blackice.mv3: Sanitizing scriptlets for store compliance"
+    "$BEFORE/tools/sanitize-scriptlets.sh" "$UBOL_DIR"
+fi
+
 if [ "$FULL" = "yes" ]; then
     EXTENSION="zip"
     if [ "$PLATFORM" = "firefox" ]; then
