@@ -3,7 +3,7 @@
 Blackice is xvoidsx's Manifest V3 ad/tracker blocker: a fork of
 [uBlock Origin Lite](https://github.com/uBlockOrigin/uBOL-home) (uBOL)
 with a nightshadeNeon interface. Chromium is the supported platform;
-Firefox ships as a signed `.xpi` in every release.
+a Firefox MV3 target exists in-tree but is unpackaged and untested.
 
 ## Source map
 
@@ -36,9 +36,6 @@ never commit it; the shippable zip goes on a GitHub Release.
 
 - User-visible strings say **Blackice**. The extension locale name is
   `Blackice`; the build directory is `blackice.chromium`.
-- Firefox: extension name is `blackice`, extension ID is
-  `rav3nwing@proton.me` (set in
-  `uBlock/platform/mv3/firefox/manifest.json`).
 - Keep Raymond Hill's copyright and all upstream source notices intact.
   Add xvoidsx copyright **only** for Blackice modifications.
 - Never present Blackice as an official uBlock project. It is a fork —
@@ -69,23 +66,6 @@ it before debugging a reported issue.
 - Do not dogfood Blackice alongside uBOL or uBO — they fight over the
   same requests.
 
-## Filter lists
-
-Blackice ships uBO's filter lists plus Brave's
-([brave/adblock-lists](https://github.com/brave/adblock-lists)).
-Integration point: `uBlock/platform/mv3/rulesets.json` (the MV3 DNR
-compiler reads this, not `assets.json` alone). To add a new curated
-list:
-
-1. Add the entry to `uBlock/assets/assets.json` (for the dashboard UI).
-2. Add the entry to `uBlock/platform/mv3/rulesets.json` (for DNR
-   compilation) — id, name, group, enabled flag, URL, homeURL.
-3. Rebuild and verify the rules appear in
-   `uBlock/dist/build/blackice.chromium/rulesets/main/`.
-
-`brave-unbreak` (226 DNR rules) was the first Brave list, added
-2026-10-14 — it fixed YouTube's anti-adblock reload loop.
-
 ## Privacy
 
 Blackice collects nothing: no accounts, analytics, telemetry, or network
@@ -93,25 +73,28 @@ requests of its own. The policy lives in `PRIVACY.md` (also the URL used
 in the Chrome Web Store listing). If a change ever collects data, the
 policy changes first.
 
+## Store review (hard-won lesson, 2026-10-14)
+
+Chrome Web Store's MV3 scanner flags **any** `document.createElement("script")`
+with a remote `src`, even inside filter-list scriptlets. uBO's lists include
+compatibility shims that re-inject third-party scripts (e.g. a gocomics.com
+scriptlet re-injecting `cdn.viafoura.net/entry/index.js`) — the scanner
+doesn't care that it's filter data, not the extension loading remote code.
+
+`tools/sanitize-scriptlets.sh` strips these at build time (wired into
+`create_release.yml` for all four platforms). Removing a tracker re-enabler
+aligns with the block-everything philosophy, so this is a feature, not a
+workaround. Before every store submission, verify the built zip contains no
+remote-script-injection patterns in `rulesets/scripting/`.
+
 ## Releasing
 
-Releases are built by the `create_release.yml` GitHub Actions workflow
-(trigger via workflow_dispatch). It:
-
-1. Builds all four platforms: Chromium, Edge, Firefox (`.xpi`), Safari.
-2. Commits updated MV3 package files back to the repo.
-3. Creates a GitHub Release and attaches all four zips automatically
-   (GITHUB_TOKEN can upload assets; the surrogate credential cannot).
-
-Artifact naming: `blackice-{platform}-{version}.zip`, e.g.
-`blackice-chromium-2026.1014.625.zip` (Firefox: `.xpi`). The naming is
-set in `uBlock/tools/make-mv3.sh` (`UBOL_PACKAGE_NAME`) and echoed into
-env vars in `create_release.yml`.
-
-Release notes template: `.github/workflows/RELEASE_BODY.md`.
-
-Manual steps (Raven): Chrome Web Store and Edge Add-ons submissions are
-uploaded by hand from the release zips. See "Store automation" below.
+1. Build and dogfood the zip.
+2. Tag `v<version>` (e.g. `v2026.922.1113`).
+3. GitHub Release with the store zip attached (manifest at zip root)
+   and sideload instructions: unzip → `chrome://extensions` →
+   Developer mode → Load unpacked → select the folder.
+4. Chrome Web Store upload is a separate manual step (Raven's dev account).
 
 ## License
 
@@ -125,4 +108,4 @@ GPLv3 (`LICENSE` at root; `uBlock/LICENSE.txt` covers engine sources).
 - Idea: xvoidsx's own extension update pipeline via Chromium's `update_url` manifest field — bypasses Web Store review queues, Lains handle the whole process (weekly rebuild → release → auto-update).
 - Keep Chrome/Edge/Mozilla store listings for discovery, but own the pipeline as backup and for navi machines (blackice is force-installed there anyway).
 - Worth exploring when there's free time. Also applies to future xvoidsx extensions.
-- Tracked in Linear (XVOIDSX-30) + Notion.
+- Tracked in Linear + Notion.
