@@ -8,7 +8,7 @@ A Manifest V3 ad and tracker blocker with a nightshadeNeon soul. Forged on top o
 ## Get blackice
 
 - **Chrome Web Store:** [blackice](https://chromewebstore.google.com/detail/blackice/nncobpmjfngafidkngebojkabaabbkhm?authuser=0&hl=en)
-- **Edge Add-ons:** pending — in review
+- **Edge Add-ons:** [blackice](https://microsoftedge.microsoft.com/addons/detail/blackice/kjbeaoejoneakenimllnfhcpaiibdddl)
 - **Firefox:** coming soon
 - **Manual install / sideload:** grab the zip for your browser from [GitHub Releases](https://github.com/xvoidsx/blackice/releases), unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
 
@@ -38,8 +38,6 @@ Four profiles — *Off*, *Permissive*, *Standard*, *Ghost* — live per-tab bloc
 - The **protection mode** that is currently being used
 
 Past the Command Deck, the dashboard carries the full uBlock Origin Lite toolkit in Blackice dress: a **Filter Lists** page for choosing which curated lists stand guard (uBO's lists plus Brave's — including `brave-unbreak`, which keeps YouTube playing nice), **Custom Filters** for writing your own rules, and the settings themselves — all under the katakana rain.
-
-
 
 ## Attribution
 
