@@ -1,19 +1,21 @@
-**blackice**, an [MV3 API-based](https://developer.chrome.com/docs/extensions/mv3/intro/) ad and tracker blocker — a fork of [uBlock Origin Lite](https://github.com/uBlockOrigin/uBOL-home) with a nightshadeNeon interface.
+**Blackice** — xvoidsx's MV3 ad/tracker blocker. A fork of uBlock Origin Lite with a nightshadeNeon interface, blending uBO's filter lists with Brave's filters for the best of both blocking worlds.
 
-- [Repository](https://github.com/xvoidsx/blackice#readme)
-- [Documentation](https://github.com/xvoidsx/blackice/wiki)
+- [Documentation](https://github.com/xvoidsx/blackice#readme)
+- [Privacy policy](https://github.com/xvoidsx/blackice/blob/main/PRIVACY.md)
 
 ## Release notes
 
 %changelog%
-- Brave's filter lists (`brave-unbreak`) included alongside uBO's
+- Brave's `brave-unbreak` filters are included alongside uBO's — they fix the YouTube anti-adblock playback loop seen with stock uBOL.
 - [Commit history](https://github.com/xvoidsx/blackice/commits/%tag%)
 
 ## Installation
 
-When a new release is created, there is a delay before it becomes available in the Chrome Web Store due to their review process. This is normal.
+Store installs update automatically once each store's review clears; the packages below are for sideloading or getting it early.
 
-- Chromium: download the `blackice-chromium-%tag%.zip` below, unzip, then load unpacked via `chrome://extensions` → Developer mode → Load unpacked → select the folder.
-- Microsoft Edge: download the `blackice-edge-%tag%.zip` below, unzip, then load unpacked via `edge://extensions` → Developer mode.
-- Firefox: download the `blackice-firefox-%tag%.xpi` below, then install via `about:addons` → gear icon → Install Add-on From File.
-- Safari: download the `blackice-safari-%tag%.zip` below.
+- Chromium-based browsers: `blackice-chromium-%tag%.zip` — unzip → `chrome://extensions` → Developer mode → **Load unpacked** → select the folder.
+- Microsoft Edge: `blackice-edge-%tag%.zip` — same flow via `edge://extensions`.
+- Firefox: `blackice-firefox-%tag%.xpi` (unsigned — temporary install via `about:debugging`, or a Firefox build with signature checks relaxed).
+- Safari: `blackice-safari-%tag%.zip` — the Safari extension package (for the macOS app build).
+
+Engine credit: uBlock Origin Lite by Raymond Hill (GPLv3). Filter credit includes Brave (`brave-unbreak`) and the many list authors whose work ships inside.

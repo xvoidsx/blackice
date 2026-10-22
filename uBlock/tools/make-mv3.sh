@@ -198,9 +198,27 @@ elif [ "$PLATFORM" = "safari" ]; then
 fi
 
 # blackice: strip remote-script-injecting scriptlets (Chrome Web Store MV3 policy)
-if [ -x "$BEFORE/tools/sanitize-scriptlets.sh" ]; then
+# Runs on every platform: resolve the sanitizer relative to the repo root
+# (this script lives in uBlock/tools/), falling back to $BEFORE.
+SANITIZE_SCRIPT=""
+if [ -n "$BEFORE" ] && [ -x "$BEFORE/tools/sanitize-scriptlets.sh" ]; then
+    SANITIZE_SCRIPT="$BEFORE/tools/sanitize-scriptlets.sh"
+else
+    REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+    if [ -x "$REPO_ROOT/tools/sanitize-scriptlets.sh" ]; then
+        SANITIZE_SCRIPT="$REPO_ROOT/tools/sanitize-scriptlets.sh"
+    fi
+fi
+if [ -n "$SANITIZE_SCRIPT" ]; then
     echo "*** blackice.mv3: Sanitizing scriptlets for store compliance"
-    "$BEFORE/tools/sanitize-scriptlets.sh" "$UBOL_DIR"
+    "$SANITIZE_SCRIPT" "$UBOL_DIR"
+fi
+
+# blackice: ship English locales only — the other locales still carry the
+# upstream extension name, so regional storefronts would display it.
+# default_locale is en, so every region falls back to "Blackice".
+if [ -d "$UBOL_DIR/_locales" ]; then
+    find "$UBOL_DIR/_locales" -mindepth 1 -maxdepth 1 -type d ! -name en -exec rm -rf {} +
 fi
 
 if [ "$FULL" = "yes" ]; then
