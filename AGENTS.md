@@ -32,6 +32,68 @@ Output: `uBlock/dist/build/blackice.chromium/` (load unpacked via
 `chrome://extensions` → Developer mode). `dist/` is a build artifact —
 never commit it; the shippable zip goes on a GitHub Release.
 
+### Build tree of record (learned the hard way, 2026-10-22)
+
+- **Build from the `uBOL-home` working tree** (`~/workspace/blackice/
+  uBOL-home`). The whole Blackice patch set — branding, UI, curated
+  lists, About links — lives there as *uncommitted* changes inside the
+  `uBlock` submodule (which pins upstream `gorhill/uBlock`).
+- The `xvoidsx/blackice` repo vendors the full uBlock source (no
+  submodule), but its snapshot **lags** the build tree: as of
+  2026-10-22 it has no `brave-unbreak` wiring and still carries the
+  upstream About links. A build from the repo state silently produces
+  near-stock uBOL — this is exactly how build 2026.1018.700 lost the
+  Brave filters. Until the patch set is synced into the repo, the
+  local tree is the release of record and repo CI releases must not
+  be cut.
+- **Purge the ruleset cache before every build:**
+  `rm -rf uBlock/dist/build/mv3-data/chromium uBlock/dist/build/mv3-data/edge`
+  (keep `mv3-data/secret.txt`). `make-rulesets` reuses cached list
+  texts with *no* expiry check; a stale cache compiles silently —
+  build 2026.1022.632 shipped month-old lists (rus-0 compiled
+  6003 → 0 rules) and only the per-list audit caught it.
+- The build's Node fetcher intermittently returns empty for some list
+  hosts (easylist.to, cdn.jsdelivr.net) from the build VM while curl
+  works; the build then dies with "Filter list should not be empty".
+  Seed that list's cache file via curl from its canonical URL and
+  verify the content (title header, size, line count) before rerunning.
+- **Edge:** the workflow's Edge step passes no `before=`, so
+  `tools/sanitize-scriptlets.sh` never runs for Edge. Run it manually
+  on the Edge build dir before zipping, and verify the viafoura CDN
+  line is gone (see Store review).
+- **Locale strip:** after building, strip `_locales` in the build dir
+  to `en` only, then zip. Shipping all locales makes regional
+  storefronts display the upstream name; en-only + `default_locale:
+  en` makes every region display "Blackice".
+
+### The Blackice patch set (what makes it ours)
+
+Kept in the build tree's `uBlock/` working copy:
+
+- nightshadeNeon UI: popup command card, element picker/zapper
+  styling, katakana-rain dashboard, first-run welcome page, icons.
+- Rebranded locale strings (`extName` = "Blackice", fork-attribution
+  About strings stay — see Branding rules).
+- **Curated lists:** Brave's `brave-unbreak` is wired in at two
+  points — `uBlock/assets/assets.json` and the MV3 compilation entry
+  point `uBlock/platform/mv3/rulesets.json` (`id: brave-unbreak`,
+  group `default`, enabled). Both are required; the manifest of a
+  correct build declares it.
+- **About links** (since 2026.1022.705): the dashboard About tab's
+  Privacy / Documentation / Changelog links point at
+  `github.com/xvoidsx/blackice` (`PRIVACY.md`, repo root, releases) —
+  not upstream's wiki. Pointers that are genuinely upstream's stay:
+  filter-issue reporting goes to the uAssets tracker, and copyright
+  headers stay untouched.
+
+### Our own filters (when we get there)
+
+When xvoidsx authors its own list: host the list file in this repo,
+add an entry pointing at it in **both** `assets.json` and
+`platform/mv3/rulesets.json` (group `default`, enabled), rebuild, and
+gate on its compiled rules appearing in the output zips (next
+section). Same bar as every curated list: real or not at all.
+
 ## Branding rules
 
 - User-visible strings say **Blackice**. The extension locale name is
@@ -87,6 +149,26 @@ aligns with the block-everything philosophy, so this is a feature, not a
 workaround. Before every store submission, verify the built zip contains no
 remote-script-injection patterns in `rulesets/scripting/`.
 
+## Verifying a build (release gates)
+
+No zip is done until both platform zips pass, checked against the
+previous release's zips:
+
+- Manifest declares every expected ruleset (57 as of 2026-10),
+  **including `brave-unbreak`**; its compiled rules are present
+  (~226 rules: `rulesets/main/brave-unbreak.json`; Edge keeps
+  rulesets at the package root, so `brave-unbreak.json` there).
+- uBO's core lists are healthy: per-list main-rule counts in the same
+  band as the previous release (ublock-filters ~5.6k, easylist
+  ~3.7k, rus-0 ~6k, irn-0 ~700). A collapse toward 0 means a bad
+  fetch or a stale cache — rebuild, don't ship.
+- `permissions` / `host_permissions` identical to the previous
+  release (changes kick store submissions into manual review).
+- `_locales` contains only `en`; `extName` reads "Blackice"; no
+  manifest `key` or `update_url` (until the kori pipeline lands).
+- Zero remote-script-injection patterns under `rulesets/scripting/`
+  (the sanitize gate above).
+
 ## Releasing
 
 1. Build and dogfood the zip.
@@ -95,6 +177,14 @@ remote-script-injection patterns in `rulesets/scripting/`.
    and sideload instructions: unzip → `chrome://extensions` →
    Developer mode → Load unpacked → select the folder.
 4. Chrome Web Store upload is a separate manual step (Raven's dev account).
+
+Local builds are published to GitHub Releases the same way (recent
+releases use the bare version as the tag, e.g. `2026.1022.705`, with
+notes from `.github/workflows/RELEASE_BODY.md` and the Chromium +
+Edge zips attached) so anyone can sideload without the stores.
+Release *asset uploads* cannot go through the API credential
+(`uploads.github.com` rejects it) — create the release via API, then
+attach the zips from the web UI.
 
 ## License
 
