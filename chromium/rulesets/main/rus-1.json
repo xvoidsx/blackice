@@ -1080,5 +1080,7 @@
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["suggest_reqid"]}}},"type":"redirect"},"condition":{"resourceTypes":["main_frame"],"urlFilter":"||yandex.*/search/*^suggest_reqid="},"id":1079},
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["from"]}}},"type":"redirect"},"condition":{"resourceTypes":["main_frame"],"urlFilter":"||yandex.*=tabbar*^from="},"id":1080},
 {"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["source"]}}},"type":"redirect"},"condition":{"resourceTypes":["main_frame"],"urlFilter":"||yandex.*=tabbar*^source="},"id":1081},
-{"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["auth_renewed"]}}},"type":"redirect"},"condition":{"resourceTypes":["main_frame"],"urlFilter":"||market.yandex.*^auth_renewed="},"id":1082}
+{"action":{"redirect":{"transform":{"queryTransform":{"removeParams":["auth_renewed"]}}},"type":"redirect"},"condition":{"resourceTypes":["main_frame"],"urlFilter":"||market.yandex.*^auth_renewed="},"id":1082},
+{"action":{"type":"block"},"condition":{"urlFilter":"||fenixplay.xyz/api/stats/event"},"id":1083,"priority":10},
+{"action":{"type":"block"},"condition":{"domainType":"thirdParty","resourceTypes":["xmlhttprequest"],"urlFilter":"/api/track|"},"id":1084,"priority":10}
 ]

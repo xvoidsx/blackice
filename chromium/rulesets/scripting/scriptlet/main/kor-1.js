@@ -2276,7 +2276,7 @@ if ( $hasHostnames$ ) {
 }
 
 if ( $hasRegexes$ ) {
-    const $scriptletFromRegexes$ = /* 1 */ ["lover","lover[0-9]\\.net","68,70"];
+    const $scriptletFromRegexes$ = /* 1 */ ["lover","lover[0-9]+\\.net","68,70"];
     const { hns } = entries[0];
     for ( let i = 0, n = $scriptletFromRegexes$.length; i < n; i += 3 ) {
         const needle = $scriptletFromRegexes$[i+0];

@@ -977,5 +977,8 @@
 {"action":{"redirect":{"extensionPath":"/web_accessible_resources/amazon_apstag.js"},"type":"redirect"},"condition":{"resourceTypes":["script"],"urlFilter":"||amazon-adsystem.com/aax2/apstag.js"},"id":976,"priority":11},
 {"action":{"redirect":{"extensionPath":"/web_accessible_resources/googletagservices_gpt.js"},"type":"redirect"},"condition":{"resourceTypes":["script"],"urlFilter":"||googletagservices.com/tag/js/gpt.js"},"id":977,"priority":11},
 {"action":{"redirect":{"extensionPath":"/web_accessible_resources/googletagservices_gpt.js"},"type":"redirect"},"condition":{"resourceTypes":["script"],"urlFilter":"||securepubads.g.doubleclick.net/tag/js/gpt.js"},"id":978,"priority":11},
-{"action":{"redirect":{"extensionPath":"/web_accessible_resources/noop-1s.mp4"},"type":"redirect"},"condition":{"resourceTypes":["media"],"urlFilter":"||advod.sbs.co.kr/sbsad/"},"id":979,"priority":11}
+{"action":{"redirect":{"extensionPath":"/web_accessible_resources/noop-1s.mp4"},"type":"redirect"},"condition":{"resourceTypes":["media"],"urlFilter":"||advod.sbs.co.kr/sbsad/"},"id":979,"priority":11},
+{"action":{"type":"block"},"condition":{"initiatorDomains":["search.naver.com"],"resourceTypes":["script"],"urlFilter":"||ssl.pstatic.net/sstatic/fe/sfe/whale-dl-banner/"},"id":980,"priority":10},
+{"action":{"type":"block"},"condition":{"urlFilter":"||search.danawa.com/api/proxy/search/api/ad/"},"id":981,"priority":10},
+{"action":{"type":"block"},"condition":{"urlFilter":"||rest.memic.at/*/ad-campaigns/banners"},"id":982,"priority":10}
 ]

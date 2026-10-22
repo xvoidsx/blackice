@@ -11,7 +11,6 @@
 {"action":{"type":"block"},"condition":{"initiatorDomains":["meitui.org"],"regexFilter":"meitui.org\\/[a-z].js"},"id":10,"priority":10},
 {"action":{"type":"block"},"condition":{"initiatorDomains":["higu.tv"],"regexFilter":"\\/upload\\/[a-z0-9]{7}\\/[0-9]+-[0-9]?\\/[a-z0-9]{32}\\.gif"},"id":11,"priority":10},
 {"action":{"type":"block"},"condition":{"initiatorDomains":["dngz.net"],"regexFilter":"dngz.net\\/g\\d+.js"},"id":12,"priority":10},
-{"action":{"type":"block"},"condition":{"initiatorDomains":["novipnoad.com"],"regexFilter":"\\/theme\\/js\\/[a-z0-9]{5,}\\.js\\?v="},"id":13,"priority":10},
 {"action":{"type":"block"},"condition":{"excludedRequestDomains":["cidetxt.cc"],"initiatorDomains":["cidetxt.cc"],"regexFilter":"[a-z0-9]+\\.[a-z0-9]+\\/","resourceTypes":["script","sub_frame"]},"id":14,"priority":10},
 {"action":{"type":"block"},"condition":{"initiatorDomains":["m.2shuqu.net"],"regexFilter":"^https:\\/\\/m\\.2shuqu\\.net\\/static\\/[a-z0-9]+\\/[a-z0-9]+\\.js","resourceTypes":["script"]},"id":15,"priority":10},
 {"action":{"type":"block"},"condition":{"initiatorDomains":["youziks.com"],"regexFilter":"youziks\\.com\\/[0-9]+\\.js","resourceTypes":["script"]},"id":16,"priority":10},

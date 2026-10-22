@@ -1592,7 +1592,7 @@ if ( entries.length === 0 ) { return; }
 const todo = new Set();
 
 if ( $hasHostnames$ ) {
-    const $scriptletHostnames$ = /* 66 */ ["netq.me","mudah.my","vicek.id","01ntn.top","123av.com","doroni.me","kiryuu.id","kuyhaa.me","91porn.com","dicrotin.*","igodesu.tv","indobo.com","kiryuu.org","kiryuu02.*","lk21semi.*","nimegami.*","njavtv.com","nokephub.*","sukasex.tv","tutwuri.id","anichin.moe","anichin.top","i-jav.space","kingbokep.*","moenime.com","pemersatu.*","semprot.com","sukasex.net","westmanga.*","5.253.86.213","anichin.cafe","animekompi.*","asalunik.com","brobokep.org","jenismac.com","kimcilonly.*","kiryuu01.com","okepindo.com","simontokx.tv","ainzscans.net","bokepindo69.*","cosmicscans.*","moutogami.com","moviekhhd.biz","streamget.win","3gpterbaru.com","animekompi.vip","info.vebma.com","kawanfilm21.co","193.142.147.230","bokepindo24.com","juraganfilm.ink","komikcast02.com","komikdewasa.art","ngicstream.site","indoporntube.com","jurnalistekno.id","tantecentil.fans","websitebokep.com","02.cosmicscans.to","luciferdonghua.in","bahasteknologi.com","thejakartapost.com","tv1.lk21official.*","gudangmovies21.chat","kisahterlarang.site"];
+    const $scriptletHostnames$ = /* 64 */ ["netq.me","dodz.pro","mudah.my","01ntn.top","123av.com","doroni.me","kiryuu.id","kuyhaa.me","91porn.com","dicrotin.*","igodesu.tv","indobo.com","kiryuu.org","kiryuu02.*","lk21semi.*","nimegami.*","njavtv.com","nokephub.*","sukasex.tv","tutwuri.id","anichin.moe","anichin.top","i-jav.space","kingbokep.*","moenime.com","pemersatu.*","semprot.com","sukasex.net","westmanga.*","5.253.86.213","animekompi.*","asalunik.com","brobokep.org","jenismac.com","kimcilonly.*","kiryuu01.com","okepindo.com","simontokx.tv","ainzscans.net","bokepindo69.*","cosmicscans.*","moutogami.com","moviekhhd.biz","streamget.win","3gpterbaru.com","info.vebma.com","kawanfilm21.co","193.142.147.230","bokepindo24.com","komikcast02.com","komikdewasa.art","ngicstream.site","indoporntube.com","info-menarik.net","jurnalistekno.id","tantecentil.fans","websitebokep.com","02.cosmicscans.to","luciferdonghua.in","bahasteknologi.com","thejakartapost.com","tv1.lk21official.*","gudangmovies21.chat","kisahterlarang.site"];
     const collectArglistRefIndices = (out, hn, r) => {
         let l = 0, i = 0, d = 0;
         let candidate = '';
@@ -1637,7 +1637,7 @@ if ( $hasHostnames$ ) {
     }
     // Collect arglist references
     if ( todoIndices.size ) {
-        const $scriptletArglistRefs$ = /* 66 */ "21,26;19;29;9;28;8;28;7;9;2;28;28;28;28;6;28;28;2;28;23;28;28;17;4,28;22;17;1;28;28;25;28;3;24;28;18,25;28;28;9;16,28;25;28;28;13;27;28;15;28;10;28;25;9;14;28;12;28;5,28;23,28;28;11;9;9;18;20;28;2;28";
+        const $scriptletArglistRefs$ = /* 64 */ "20,25;27,28;18;9;27;8;27;7;9;2;27;27;27;27;6;27;27;2;27;22;27;27;16;4,27;21;16;1;27;27;24;3;23;27;17,24;27;27;9;15,27;24;27;27;13;26;27;14;10;27;24;9;27;12;27;5,27;29;22,27;27;11;9;9;17;19;27;2;27";
         const arglistRefs = $scriptletArglistRefs$.split(';');
         for ( const i of todoIndices ) {
             for ( const ref of JSON.parse(`[${arglistRefs[i]}]`) ) {
@@ -1670,8 +1670,8 @@ if ( $hasRegexes$ ) {
 if ( todo.size && todo.has(0) === false ) {
     const $scriptletFunctions$ = /* 12 */
 [abortCurrentScript,abortOnPropertyRead,abortOnPropertyWrite,preventAddEventListener,adjustSetInterval,preventFetch,preventXhr,preventBab,noEvalIf,preventSetTimeout,noWindowOpenIf,setConstant];
-    const $scriptletArgs$ = /* 33 */ ["Math.random","arv_24","SGPB_POPUP_PARAMS","MutationObserver","checkAdsStatus","document.querySelector","adsbygoogle","chp_ads_blocker_detector","document.addEventListener","window.open","getComputedStyle","","cpm","click","linkOpened","player.seeking","tampilkanUrl","load","/adblock/i","$.magnificPopup.open","LieDetector","ujiPopups","document.body.innerHTML","ads.google.com","clarity.ms","trafficbass.com","googlesyndication","/chp_?ad/","console","location.href","3000","VK_DIRECT_AD","undefined"];
-    const $scriptletArglists$ = /* 30 */ ";0,0,1;1,2;2,3;0,4;0,5,6;0,7;0,8,9;0,10,11,12;3;3,13,14;3,13,15;3,13,16;3,17,18;1,19;1,20;1,21;2,22;4;5,23;5,6;5,24;5,25;6,26;7;8,27;9,28;9,29,30;10;11,31,32";
+    const $scriptletArgs$ = /* 33 */ ["Math.random","arv_24","SGPB_POPUP_PARAMS","MutationObserver","checkAdsStatus","document.querySelector","adsbygoogle","chp_ads_blocker_detector","document.addEventListener","window.open","getComputedStyle","","cpm","click","linkOpened","player.seeking","tampilkanUrl","load","/adblock/i","LieDetector","ujiPopups","document.body.innerHTML","ads.google.com","clarity.ms","trafficbass.com","googlesyndication","/chp_?ad/","console","location.href","3000","bait_b3j4hu231","true","ai_front"];
+    const $scriptletArglists$ = /* 30 */ ";0,0,1;1,2;2,3;0,4;0,5,6;0,7;0,8,9;0,10,11,12;3;3,13,14;3,13,15;3,13,16;3,17,18;1,19;1,20;2,21;4;5,22;5,6;5,23;5,24;6,25;7;8,26;9,27;9,28,29;10;11,30,31;2,32";
     const arglists = $scriptletArglists$.split(';');
     const args = $scriptletArgs$;
     for ( const ref of todo ) {

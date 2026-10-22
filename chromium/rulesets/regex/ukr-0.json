@@ -16,7 +16,6 @@
 {"action":{"type":"block"},"condition":{"initiatorDomains":["usite.pro"],"regexFilter":"usite\\.(pro|org|ru|com|ua)\\/[A-Za-z0-9_%]{3,12}\\/.*\\?[A-Za-z0-9%]{70,100}$","resourceTypes":["script"]},"id":15,"priority":10},
 {"action":{"type":"block"},"condition":{"domainType":"firstParty","initiatorDomains":["ru"],"regexFilter":"^https?:\\/\\/(?:[A-Za-z0-9-]+\\.)*[A-Za-z0-9-]+\\.ru\\/(?:[A-Za-z0-9_-]{2,12}\\/){0,5}[A-Za-z0-9_-]{2,12}\\?[A-Za-z0-9!;^%_]{50,}[A-Za-z0-9!;^%_]$","resourceTypes":["script"]},"id":16,"priority":10},
 {"action":{"type":"block"},"condition":{"regexFilter":"^https:\\/\\/[a-z]+\\.[a-z]+\\.com\\/api-integration\\/[a-z]+\\?[a-z]+=[a-z-0-9][a-z-0-9][a-z-0-9][a-z-0-9][a-z-0-9][a-z-0-9][a-z-0-9][a-z-0-9]-"},"id":17,"priority":10},
-{"action":{"type":"block"},"condition":{"regexFilter":"^2.59.219.121"},"id":18,"priority":10},
 {"action":{"type":"block"},"condition":{"regexFilter":"clan.su\\/\\?[A-Za-z0-9]+%21.+%5E","resourceTypes":["script"]},"id":19,"priority":10},
 {"action":{"type":"block"},"condition":{"domainType":"thirdParty","regexFilter":"\\.com\\/jsonp\\.php\\?[A-Za-z0-9]{300,}"},"id":20,"priority":10},
 {"action":{"type":"block"},"condition":{"domainType":"thirdParty","regexFilter":"dbp\\/pre","resourceTypes":["script"]},"id":21,"priority":10},
