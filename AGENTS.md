@@ -32,21 +32,26 @@ Output: `uBlock/dist/build/blackice.chromium/` (load unpacked via
 `chrome://extensions` → Developer mode). `dist/` is a build artifact —
 never commit it; the shippable zip goes on a GitHub Release.
 
-### Build tree of record (learned the hard way, 2026-10-22)
+### Build tree of record (resolved 2026-10-22)
 
-- **Build from the `uBOL-home` working tree** (`~/workspace/blackice/
-  uBOL-home`). The whole Blackice patch set — branding, UI, curated
-  lists, About links — lives there as *uncommitted* changes inside the
-  `uBlock` submodule (which pins upstream `gorhill/uBlock`).
-- The `xvoidsx/blackice` repo vendors the full uBlock source (no
-  submodule), but its snapshot **lags** the build tree: as of
-  2026-10-22 it has no `brave-unbreak` wiring and still carries the
-  upstream About links. A build from the repo state silently produces
-  near-stock uBOL — this is exactly how build 2026.1018.700 lost the
-  Brave filters. Until the patch set is synced into the repo, the
-  local tree is the release of record and repo CI releases must not
-  be cut.
-- **Purge the ruleset cache before every build:**
+- **The `xvoidsx/blackice` repo is the tree of record.** The patch set
+  was synced into it on 2026-10-22 (commit `667fdd8`): brave wiring
+  (`assets.json` + `rulesets.json`), About links, Firefox manifest,
+  the blackice `create_release.yml` + `RELEASE_BODY.md`, the root
+  `tools/sanitize-scriptlets.sh`, and the hardened `make-mv3.sh`. An
+  acceptance build from a plain repo checkout matched the hand-built
+  2026.1022.705 rule-for-rule (70,494 main rules, brave-unbreak 226).
+- **Releases are cut by CI**: dispatch `create_release.yml` (or drive
+  it with `gh-release-pkg`); Actions builds all four platforms and
+  attaches the assets — the API credential cannot upload release
+  assets itself. Verified end-to-end 2026-10-22: run 39740341036 →
+  release 2026.1022.725, whose zips passed every gate below.
+- Local builds (from `~/workspace/blackice/uBOL-home` or a repo
+  checkout) are for dogfooding and the kori path. The patch set now
+  lives in BOTH trees — a fix applied to only one re-opens the
+  2026.1018.700 failure mode (that build silently lost the Brave
+  filters because the repo lagged the build tree).
+- **Purge the ruleset cache before every local build:**
   `rm -rf uBlock/dist/build/mv3-data/chromium uBlock/dist/build/mv3-data/edge`
   (keep `mv3-data/secret.txt`). `make-rulesets` reuses cached list
   texts with *no* expiry check; a stale cache compiles silently —
